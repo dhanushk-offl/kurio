@@ -8,7 +8,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
-class KurioApi(
+open class KurioApi(
     private val client: HttpClient
 ) {
     private companion object {
@@ -19,7 +19,7 @@ class KurioApi(
         const val CHANGELOG_ENDPOINT = "$BASE_URL/changelog"
     }
 
-    suspend fun checkForUpdate(
+    open suspend fun checkForUpdate(
         currentVersion: String,
         channel: String = "stable"
     ): UpdateCheckResponse {

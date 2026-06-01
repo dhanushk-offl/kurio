@@ -1,0 +1,2 @@
+
+<domain_commonMain>:com.dhanu.kurio.domain.di:!com.dhanu.kurio.domain.repository:&com.dhanu.kurio.domain.usecase.history:$com.dhanu.kurio.domain.usecase.model:'com.dhanu.kurio.domain.usecase.settings:,com.dhanu.kurio.domain.usecase.transcription: kurio.domain.generated.resources

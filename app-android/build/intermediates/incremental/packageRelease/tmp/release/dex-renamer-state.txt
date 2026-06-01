@@ -1,0 +1,4 @@
+#Sun May 31 16:15:26 IST 2026
+base.0=/home/dhanush/kurio/app-android/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

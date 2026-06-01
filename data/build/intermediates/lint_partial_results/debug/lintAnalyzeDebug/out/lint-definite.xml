@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.3" type="incidents">
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.core:core-ktx than 1.15.0 is available: 1.18.0">
+        <fix-replace
+            description="Change to 1.18.0"
+            family="Update versions"
+            oldString="1.15.0"
+            replacement="1.18.0"
+            priority="0"/>
+        <location
+            file="${:data*projectDir}/build.gradle.kts"
+            line="24"
+            column="28"
+            startOffset="860"
+            endLine="24"
+            endColumn="59"
+            endOffset="891"/>
+    </incident>
+
+    <incident
+        id="UseTomlInstead"
+        severity="warning"
+        message="Use version catalog instead">
+        <fix-composite
+            description="Replace with new library catalog declaration for core-ktx"
+            robot="true">
+            <fix-replace
+                description="Replace with coreKtx = &quot;1.15.0&quot;..."
+                robot="true"
+                oldString="_lint_insert_begin_"
+                replacement="coreKtx = &quot;1.15.0&quot;&#xA;"
+                priority="0">
+                <range
+                    file="$HOME/kurio/gradle/libs.versions.toml"
+                    startOffset="25"
+                    endOffset="25"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with core-ktx = { module = &quot;androidx.core:core-ktx&quot;, version.ref = &quot;coreKtx&quot; }..."
+                robot="true"
+                oldString="_lint_insert_begin_"
+                replacement="core-ktx = { module = &quot;androidx.core:core-ktx&quot;, version.ref = &quot;coreKtx&quot; }&#xA;"
+                priority="0">
+                <range
+                    file="$HOME/kurio/gradle/libs.versions.toml"
+                    startOffset="433"
+                    endOffset="433"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with libs.core.ktx"
+                robot="true"
+                replacement="libs.core.ktx"
+                priority="0">
+                <range
+                    file="${:data*projectDir}/build.gradle.kts"
+                    startOffset="860"
+                    endOffset="891"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:data*projectDir}/build.gradle.kts"
+            line="24"
+            column="28"
+            startOffset="860"
+            endLine="24"
+            endColumn="59"
+            endOffset="891"/>
+    </incident>
+
+</incidents>

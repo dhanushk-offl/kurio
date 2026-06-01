@@ -1,0 +1,6 @@
+[
+    {
+        "merged": "com.dhanu.kurio.android.platform-android-release-51:/layout-v26/abc_screen_toolbar.xml",
+        "source": "com.dhanu.kurio.android.platform-android-appcompat-1.7.0-18:/layout-v26/abc_screen_toolbar.xml"
+    }
+]

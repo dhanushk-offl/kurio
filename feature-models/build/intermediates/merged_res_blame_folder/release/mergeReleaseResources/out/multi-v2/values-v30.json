@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.dhanu.kurio.feature.models.feature-models-release-43:/values-v30/values-v30.xml",
+            "map": [
+                {
+                    "source": "/home/dhanush/.gradle/caches/8.9/transforms/87633f086f3b58c288655c25a9f25c66/transformed/material3-release/res/values-v30/values-v30.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "72",
+                        "endOffsets": "123"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.dhanu.kurio.feature.models.feature-models-mergeReleaseResources-41:/values-v30/values-v30.xml",
+            "map": [
+                {
+                    "source": "/home/dhanush/.gradle/caches/8.9/transforms/87633f086f3b58c288655c25a9f25c66/transformed/material3-release/res/values-v30/values-v30.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "72",
+                        "endOffsets": "123"
+                    }
+                }
+            ]
+        }
+    ]
+}

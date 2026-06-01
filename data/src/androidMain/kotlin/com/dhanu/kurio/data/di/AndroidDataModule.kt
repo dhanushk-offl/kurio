@@ -6,6 +6,8 @@ import com.dhanu.kurio.data.audio.AndroidAudioRecorder
 import com.dhanu.kurio.data.createDatabase
 import com.dhanu.kurio.data.engine.SpeechEngine
 import com.dhanu.kurio.data.engine.WhisperCppEngine
+import com.dhanu.kurio.data.engine.SpeechModelManager
+import com.dhanu.kurio.data.storage.StorageManager
 import com.dhanu.kurio.data.remote.api.KurioApi
 import com.dhanu.kurio.data.repository.ModelRepositoryImpl
 import com.dhanu.kurio.data.repository.SettingsRepositoryImpl
@@ -17,7 +19,6 @@ import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
-import org.koin.android.ext.koin.withContext
 import org.koin.dsl.module
 
 val androidDataModule = module {
@@ -47,7 +48,9 @@ val androidDataModule = module {
 
     single<AudioRecorder> { AndroidAudioRecorder(get()) }
     single<SpeechEngine> { WhisperCppEngine(get()) }
+    single { SpeechModelManager(get(), get(), get(), get()) }
 
     single<ModelRepository> { ModelRepositoryImpl(get(), get(), get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(get(), get(), get(), get()) }
+    single { StorageManager(get(), get(), get(), get()) }
 }

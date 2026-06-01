@@ -11,6 +11,7 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -78,8 +79,8 @@ class SettingsViewModel(
     fun onClearCache() {
         scope.launch {
             clearCache()
-            getStorageUsage().first {
-                _uiState.update { settings -> settings.copy(storageUsage = it) }
+            getStorageUsage().first { usage ->
+                _uiState.update { settings -> settings.copy(storageUsage = usage) }
                 true
             }
         }

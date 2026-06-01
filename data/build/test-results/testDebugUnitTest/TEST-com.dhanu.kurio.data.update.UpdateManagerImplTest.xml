@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dhanu.kurio.data.update.UpdateManagerImplTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-05-31T16:29:32" hostname="dhanu" time="0.126">
+  <properties/>
+  <testcase name="given newer version available on stable channel when checkForUpdates then returns hasUpdate true" classname="com.dhanu.kurio.data.update.UpdateManagerImplTest" time="0.123"/>
+  <testcase name="given same version available on stable channel when checkForUpdates then returns hasUpdate false" classname="com.dhanu.kurio.data.update.UpdateManagerImplTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+]]></system-err>
+</testsuite>

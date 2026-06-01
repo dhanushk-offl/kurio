@@ -22,7 +22,7 @@ class WhisperCppEngine(
                 System.loadLibrary("whisper")
                 nativeLoaded = true
             } catch (e: UnsatisfiedLinkError) {
-                Napier.e("WhisperEngine") { "Native whisper library not available" }
+                Napier.e(tag = "WhisperEngine") { "Native whisper library not available" }
             }
         }
     }
@@ -35,7 +35,7 @@ class WhisperCppEngine(
         return withContext(Dispatchers.IO) {
             try {
                 if (!modelLoaded) {
-                    Napier.e("WhisperEngine") { "Model not loaded" }
+                    Napier.e(tag = "WhisperEngine") { "Model not loaded" }
                     return@withContext null
                 }
 
@@ -44,7 +44,7 @@ class WhisperCppEngine(
                 val text = if (nativeLoaded) {
                     nativeTranscribe(audioData)
                 } else {
-                    Napier.w("WhisperEngine") { "Native lib not loaded, returning mock" }
+                    Napier.w(tag = "WhisperEngine") { "Native lib not loaded, returning mock" }
                     simulateTranscription(audioData)
                 }
 
@@ -62,7 +62,7 @@ class WhisperCppEngine(
                     modelId = currentModelPath?.substringAfterLast("/")?.substringBefore(".bin") ?: "unknown"
                 )
             } catch (e: Exception) {
-                Napier.e("WhisperEngine", throwable = e) { "Transcription failed" }
+                Napier.e(throwable = e, tag = "WhisperEngine") { "Transcription failed" }
                 null
             }
         }
@@ -78,11 +78,11 @@ class WhisperCppEngine(
                 }
                 if (modelLoaded) {
                     currentModelPath = modelPath
-                    Napier.d("WhisperEngine") { "Model loaded: $modelPath" }
+                    Napier.d(tag = "WhisperEngine") { "Model loaded: $modelPath" }
                 }
                 modelLoaded
             } catch (e: Exception) {
-                Napier.e("WhisperEngine", throwable = e) { "Failed to load model" }
+                Napier.e(throwable = e, tag = "WhisperEngine") { "Failed to load model" }
                 modelLoaded = false
                 false
             }

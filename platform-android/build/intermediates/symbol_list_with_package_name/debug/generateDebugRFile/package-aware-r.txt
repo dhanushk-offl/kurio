@@ -1,0 +1,4 @@
+com.dhanu.kurio.android
+string accessibility_service_description
+string accessibility_service_label
+xml accessibility_service_config

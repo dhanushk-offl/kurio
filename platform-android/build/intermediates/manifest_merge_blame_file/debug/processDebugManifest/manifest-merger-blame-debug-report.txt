@@ -1,0 +1,62 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.dhanu.kurio.android" >
+4
+5    <uses-sdk android:minSdkVersion="26" />
+6
+7    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+7-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:4:5-71
+7-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:4:22-68
+8    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+8-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:5:5-78
+8-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:5:22-75
+9    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+9-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:6:5-77
+9-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:6:22-74
+10    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+10-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:7:5-88
+10-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:7:22-85
+11    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+11-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:8:5-77
+11-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:8:22-74
+12    <uses-permission android:name="android.permission.VIBRATE" />
+12-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:9:5-66
+12-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:9:22-63
+13
+14    <application>
+14-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:11:5-29:19
+15        <service
+15-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:12:9-23:19
+16            android:name="com.dhanu.kurio.android.accessibility.KurioAccessibilityService"
+16-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:13:13-91
+17            android:exported="true"
+17-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:16:13-36
+18            android:label="@string/accessibility_service_label"
+18-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:15:13-64
+19            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+19-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:14:13-79
+20            <intent-filter>
+20-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:17:13-19:29
+21                <action android:name="android.accessibilityservice.AccessibilityService" />
+21-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:18:17-92
+21-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:18:25-89
+22            </intent-filter>
+23
+24            <meta-data
+24-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:20:13-22:72
+25                android:name="android.accessibilityservice"
+25-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:21:17-60
+26                android:resource="@xml/accessibility_service_config" />
+26-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:22:17-69
+27        </service>
+28        <service
+28-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:25:9-28:40
+29            android:name="com.dhanu.kurio.android.service.KurioForegroundService"
+29-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:26:13-82
+30            android:exported="false"
+30-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:28:13-37
+31            android:foregroundServiceType="microphone" />
+31-->/home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:27:13-55
+32    </application>
+33
+34</manifest>

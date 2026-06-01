@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.3" type="incidents">
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 26">
+        <fix-data conditional="true"/>
+        <location
+            file="${:platform-android*debug*MAIN*sourceProvider*0*javaDir*2}/com/dhanu/kurio/android/notification/KurioNotificationManager.kt"
+            line="16"
+            column="13"
+            startOffset="519"
+            endLine="16"
+            endColumn="59"
+            endOffset="565"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 26">
+        <fix-data conditional="true"/>
+        <location
+            file="${:platform-android*debug*MAIN*sourceProvider*0*javaDir*2}/com/dhanu/kurio/android/overlay/KurioOverlayService.kt"
+            line="50"
+            column="30"
+            startOffset="1535"
+            endLine="50"
+            endColumn="76"
+            endOffset="1581"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is never &lt; 26">
+        <fix-data conditional="false"/>
+        <location
+            file="${:platform-android*debug*MAIN*sourceProvider*0*javaDir*2}/com/dhanu/kurio/android/permission/KurioPermissions.kt"
+            line="19"
+            column="13"
+            startOffset="563"
+            endLine="19"
+            endColumn="58"
+            endOffset="608"/>
+    </incident>
+
+</incidents>

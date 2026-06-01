@@ -1,10 +1,13 @@
 package com.dhanu.kurio.buildlogic
 
+import com.android.build.gradle.LibraryExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.compose.ComposeExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class KmpLibraryConventionPlugin : Plugin<Project> {
@@ -16,11 +19,24 @@ class KmpLibraryConventionPlugin : Plugin<Project> {
             pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
             pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
 
+            val composeDeps = extensions.getByType<ComposeExtension>().dependencies
+
+            extensions.configure<LibraryExtension> {
+                compileSdk = 35
+                defaultConfig.minSdk = 26
+                compileOptions {
+                    sourceCompatibility = JavaVersion.VERSION_17
+                    targetCompatibility = JavaVersion.VERSION_17
+                }
+            }
+
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget {
                     compilations.all {
-                        kotlinOptions {
-                            jvmTarget = "17"
+                        compileTaskProvider.configure {
+                            compilerOptions {
+                                jvmTarget.set(JvmTarget.JVM_17)
+                            }
                         }
                     }
                 }
@@ -36,17 +52,28 @@ class KmpLibraryConventionPlugin : Plugin<Project> {
                     }
                 }
 
-                sourceSets {
-                    commonMain.dependencies {
-                        implementation(compose.runtime)
-                        implementation(compose.foundation)
-                        implementation(compose.material3)
-                        implementation(compose.ui)
-                        implementation(compose.components.resources)
+                sourceSets.apply {
+                    getByName("commonMain") {
+                        dependencies {
+                            implementation(composeDeps.runtime)
+                            implementation(composeDeps.foundation)
+                            implementation(composeDeps.material3)
+                            implementation(composeDeps.ui)
+                            implementation(composeDeps.components.resources)
+                        }
                     }
 
-                    androidMain.dependencies {
-                        implementation(compose.preview)
+                    getByName("androidMain") {
+                        dependencies {
+                            implementation(composeDeps.preview)
+                        }
+                    }
+
+                    getByName("commonTest") {
+                        dependencies {
+                            implementation("org.jetbrains.kotlin:kotlin-test:2.1.0")
+                            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+                        }
                     }
                 }
             }

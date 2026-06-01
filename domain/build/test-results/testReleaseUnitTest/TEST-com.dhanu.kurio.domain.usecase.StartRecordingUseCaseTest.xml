@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dhanu.kurio.domain.usecase.StartRecordingUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-05-31T08:45:30" hostname="dhanu" time="0.326">
+  <properties/>
+  <testcase name="given repository returns null when startRecording then use case returns null" classname="com.dhanu.kurio.domain.usecase.StartRecordingUseCaseTest" time="0.326"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

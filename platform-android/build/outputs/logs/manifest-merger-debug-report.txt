@@ -1,0 +1,72 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:2:1-31:12
+	package
+		INJECTED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:4:5-71
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:4:22-68
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:5:5-78
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:5:22-75
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:6:5-77
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:6:22-74
+uses-permission#android.permission.FOREGROUND_SERVICE_MICROPHONE
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:7:5-88
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:7:22-85
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:8:5-77
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:8:22-74
+uses-permission#android.permission.VIBRATE
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:9:5-66
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:9:22-63
+application
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:11:5-29:19
+service#com.dhanu.kurio.android.accessibility.KurioAccessibilityService
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:12:9-23:19
+	android:label
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:15:13-64
+	android:exported
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:16:13-36
+	android:permission
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:14:13-79
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:13:13-91
+intent-filter#action:name:android.accessibilityservice.AccessibilityService
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:17:13-19:29
+action#android.accessibilityservice.AccessibilityService
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:18:17-92
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:18:25-89
+meta-data#android.accessibilityservice
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:20:13-22:72
+	android:resource
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:22:17-69
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:21:17-60
+service#com.dhanu.kurio.android.service.KurioForegroundService
+ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:25:9-28:40
+	android:exported
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:28:13-37
+	android:foregroundServiceType
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:27:13-55
+	android:name
+		ADDED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml:26:13-82
+uses-sdk
+INJECTED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml
+INJECTED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/dhanush/kurio/platform-android/src/main/AndroidManifest.xml

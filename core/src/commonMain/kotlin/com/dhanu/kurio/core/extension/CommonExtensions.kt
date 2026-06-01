@@ -11,7 +11,7 @@ fun String?.orEmpty(): String = this ?: ""
 fun Long?.orZero(): Long = this ?: 0L
 
 fun <T> Flow<T>.withErrorLogging(tag: String): Flow<T> = this.catch { e ->
-    Napier.e(tag, throwable = e) { "Flow error" }
+    Napier.e(throwable = e, tag = tag) { "Flow error" }
     throw e
 }
 

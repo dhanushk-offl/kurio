@@ -1,0 +1,6 @@
+[
+    {
+        "merged": "com.dhanu.kurio.feature.settings.feature-settings-release-43:/drawable-v21/notification_action_background.xml",
+        "source": "com.dhanu.kurio.feature.settings.feature-settings-core-1.13.1-5:/drawable-v21/notification_action_background.xml"
+    }
+]

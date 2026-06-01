@@ -1,6 +1,7 @@
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.android.library)
     kotlin("android")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -9,6 +10,10 @@ android {
 
     defaultConfig {
         minSdk = 26
+    }
+
+    buildFeatures {
+        compose = true
     }
 
     compileOptions {
@@ -28,4 +33,13 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.napier)
+    
+    // Compose dependencies for platform permissions/overlay UI
+    implementation("androidx.activity:activity-compose:1.9.3")
+    implementation("androidx.compose.runtime:runtime:1.7.3")
+    implementation("androidx.compose.ui:ui:1.7.3")
+    implementation("androidx.compose.foundation:foundation:1.7.3")
+    implementation("androidx.compose.animation:animation:1.7.3")
+    implementation("androidx.compose.material3:material3:1.3.0")
 }
+

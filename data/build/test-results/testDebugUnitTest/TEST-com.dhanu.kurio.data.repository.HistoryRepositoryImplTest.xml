@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dhanu.kurio.data.repository.HistoryRepositoryImplTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-05-31T16:29:32" hostname="dhanu" time="0.181">
+  <properties/>
+  <testcase name="given history entries in dao when getHistory then returns domain models" classname="com.dhanu.kurio.data.repository.HistoryRepositoryImplTest" time="0.174"/>
+  <testcase name="given empty dao when getHistory then returns empty list" classname="com.dhanu.kurio.data.repository.HistoryRepositoryImplTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

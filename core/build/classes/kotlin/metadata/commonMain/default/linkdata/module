@@ -1,0 +1,2 @@
+
+<core_commonMain>:!com.dhanu.kurio.core.design.color:!com.dhanu.kurio.core.design.theme:&com.dhanu.kurio.core.design.typography:com.dhanu.kurio.core.di:com.dhanu.kurio.core.extension:com.dhanu.kurio.core.model:com.dhanu.kurio.core.util:kurio.core.generated.resources

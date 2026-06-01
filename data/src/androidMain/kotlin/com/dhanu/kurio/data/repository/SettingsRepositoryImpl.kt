@@ -156,7 +156,7 @@ class SettingsRepositoryImpl(
                 checkTimestamp = System.currentTimeMillis()
             )
         } catch (e: Exception) {
-            Napier.e("UpdateCheck", throwable = e) { "Failed to check for updates" }
+            Napier.e(throwable = e, tag = "UpdateCheck") { "Failed to check for updates" }
             UpdateCheckResult(
                 hasUpdate = false,
                 checkTimestamp = System.currentTimeMillis()
@@ -201,7 +201,7 @@ class SettingsRepositoryImpl(
                 )
             }
         } catch (e: Exception) {
-            Napier.e("Changelog", throwable = e) { "Failed to fetch changelog" }
+            Napier.e(throwable = e, tag = "Changelog") { "Failed to fetch changelog" }
             emptyList()
         }
     }

@@ -1,0 +1,2 @@
+
+<presentation_commonMain>:-com.dhanu.kurio.presentation.component.button:+com.dhanu.kurio.presentation.component.card:-com.dhanu.kurio.presentation.component.dialog:.com.dhanu.kurio.presentation.component.overlay:0com.dhanu.kurio.presentation.component.textfield:'com.dhanu.kurio.presentation.navigation:"com.dhanu.kurio.presentation.theme:&kurio.presentation.generated.resources

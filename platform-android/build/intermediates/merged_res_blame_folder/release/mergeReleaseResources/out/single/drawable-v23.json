@@ -1,0 +1,6 @@
+[
+    {
+        "merged": "com.dhanu.kurio.android.platform-android-release-51:/drawable-v23/abc_control_background_material.xml",
+        "source": "com.dhanu.kurio.android.platform-android-appcompat-1.7.0-18:/drawable-v23/abc_control_background_material.xml"
+    }
+]

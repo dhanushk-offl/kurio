@@ -1,0 +1,20 @@
+/home/dhanush/kurio/platform-android/src/main/kotlin/com/dhanu/kurio/android/notification/KurioNotificationManager.kt:16: Warning: Unnecessary; SDK_INT is always >= 26 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dhanush/kurio/platform-android/src/main/kotlin/com/dhanu/kurio/android/overlay/KurioOverlayService.kt:50: Warning: Unnecessary; SDK_INT is always >= 26 [ObsoleteSdkInt]
+        val layoutFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dhanush/kurio/platform-android/src/main/kotlin/com/dhanu/kurio/android/permission/KurioPermissions.kt:19: Warning: Unnecessary; SDK_INT is never < 26 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+0 errors, 3 warnings

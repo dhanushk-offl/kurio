@@ -1,0 +1,127 @@
+[
+  {
+    "moduleId": "module org.jetbrains.kotlin:kotlin-stdlib:2.1.0",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlin-kotlin-stdlib-2.1.0-commonMain-ITmP6A.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.runtime:runtime:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.runtime-runtime-1.7.3-commonMain-9pDeVQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.foundation:foundation:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.foundation-foundation-1.7.3-commonMain-m1MhUQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.material3:material3:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.material3-material3-1.7.3-commonMain-qpUt6Q.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.ui:ui:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.ui-ui-1.7.3-commonMain-0ic95A.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.components:components-resources:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.components-components-resources-1.7.3-blockingMain-Tn2Qyw.klib",
+    "sourceSetName": "blockingMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.components:components-resources:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.components-components-resources-1.7.3-commonMain-Tn2Qyw.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "project ::core",
+    "file": "/home/dhanush/kurio/core/build/classes/kotlin/metadata/commonMain",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "project ::domain",
+    "file": "/home/dhanush/kurio/domain/build/classes/kotlin/metadata/commonMain",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "project ::presentation",
+    "file": "/home/dhanush/kurio/presentation/build/classes/kotlin/metadata/commonMain",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-coroutines-core-1.9.0-concurrentMain-ENDfhw.klib",
+    "sourceSetName": "concurrentMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-coroutines-core-1.9.0-commonMain-ENDfhw.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.insert-koin:koin-core:4.0.1",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/io.insert-koin-koin-core-4.0.1-commonMain-3dsLPA.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.insert-koin:koin-compose:4.0.1",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/io.insert-koin-koin-compose-4.0.1-commonMain-8pae6A.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.animation:animation:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.animation-animation-1.7.3-commonMain-TojQLQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.material:material-icons-core:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.material-material-icons-core-1.7.3-commonMain-OY6u5w.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.material:material-ripple:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.material-material-ripple-1.7.3-commonMain-hYj_-Q.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.ui:ui-graphics:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.ui-ui-graphics-1.7.3-commonMain-kJsJ2w.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.ui:ui-text:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.ui-ui-text-1.7.3-commonMain-22Ga_g.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.runtime:runtime-saveable:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.runtime-runtime-saveable-1.7.3-commonMain-dToAUQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.ui:ui-geometry:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.ui-ui-geometry-1.7.3-commonMain-CwQ9Eg.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.ui:ui-unit:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.ui-ui-unit-1.7.3-commonMain-pR3KgA.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.ui:ui-util:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.ui-ui-util-1.7.3-commonMain-3-t5Ow.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.animation:animation-core:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.animation-animation-core-1.7.3-commonMain-KAIxIA.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.compose.foundation:foundation-layout:1.7.3",
+    "file": "/home/dhanush/kurio/feature-settings/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.compose.foundation-foundation-layout-1.7.3-commonMain-Nkt8ew.klib",
+    "sourceSetName": "commonMain"
+  }
+]

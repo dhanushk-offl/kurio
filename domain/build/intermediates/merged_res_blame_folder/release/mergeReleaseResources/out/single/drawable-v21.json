@@ -1,0 +1,6 @@
+[
+    {
+        "merged": "com.dhanu.kurio.domain-release-42:/drawable-v21/notification_action_background.xml",
+        "source": "com.dhanu.kurio.domain-core-1.13.1-5:/drawable-v21/notification_action_background.xml"
+    }
+]

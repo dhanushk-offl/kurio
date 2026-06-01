@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.3" type="incidents">
+
+    <incident
+        id="AndroidGradlePluginVersion"
+        severity="warning"
+        message="A newer version of com.android.application than 8.7.3 is available: 9.2.1">
+        <fix-replace
+            description="Change to 9.2.1"
+            family="Update versions"
+            oldString="8.7.3"
+            replacement="9.2.1"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="2"
+            column="7"
+            startOffset="17"
+            endLine="2"
+            endColumn="14"
+            endOffset="24"/>
+    </incident>
+
+    <incident
+        id="AndroidGradlePluginVersion"
+        severity="warning"
+        message="A newer version of com.android.library than 8.7.3 is available: 9.2.1">
+        <fix-replace
+            description="Change to 9.2.1"
+            family="Update versions"
+            oldString="8.7.3"
+            replacement="9.2.1"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="2"
+            column="7"
+            startOffset="17"
+            endLine="2"
+            endColumn="14"
+            endOffset="24"/>
+    </incident>
+
+    <incident
+        id="AndroidGradlePluginVersion"
+        severity="warning"
+        message="A newer version of com.android.tools.build:gradle than 8.7.3 is available: 9.2.1">
+        <fix-replace
+            description="Change to 9.2.1"
+            family="Update versions"
+            oldString="8.7.3"
+            replacement="9.2.1"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="2"
+            column="7"
+            startOffset="17"
+            endLine="2"
+            endColumn="14"
+            endOffset="24"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.activity:activity-compose than 1.9.3 is available: 1.13.0">
+        <fix-replace
+            description="Change to 1.13.0"
+            family="Update versions"
+            oldString="1.9.3"
+            replacement="1.13.0"
+            priority="0"/>
+        <location
+            file="${:app-android*projectDir}/build.gradle.kts"
+            line="38"
+            column="28"
+            startOffset="1397"
+            endLine="38"
+            endColumn="70"
+            endOffset="1439"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.room:room-compiler than 2.7.0 is available: 2.8.4">
+        <fix-replace
+            description="Change to 2.8.4"
+            family="Update versions"
+            oldString="2.7.0"
+            replacement="2.8.4"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="8"
+            column="8"
+            startOffset="139"
+            endLine="8"
+            endColumn="15"
+            endOffset="146"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.room:room-ktx than 2.7.0 is available: 2.8.4">
+        <fix-replace
+            description="Change to 2.8.4"
+            family="Update versions"
+            oldString="2.7.0"
+            replacement="2.8.4"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="8"
+            column="8"
+            startOffset="139"
+            endLine="8"
+            endColumn="15"
+            endOffset="146"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.room:room-runtime than 2.7.0 is available: 2.8.4">
+        <fix-replace
+            description="Change to 2.8.4"
+            family="Update versions"
+            oldString="2.7.0"
+            replacement="2.8.4"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="8"
+            column="8"
+            startOffset="139"
+            endLine="8"
+            endColumn="15"
+            endOffset="146"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.datastore:datastore-preferences than 1.1.2 is available: 1.2.1">
+        <fix-replace
+            description="Change to 1.2.1"
+            family="Update versions"
+            oldString="1.1.2"
+            replacement="1.2.1"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="9"
+            column="13"
+            startOffset="159"
+            endLine="9"
+            endColumn="20"
+            endOffset="166"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.firebase:firebase-crashlytics than 19.2.0 is available: 20.0.6">
+        <fix-replace
+            description="Change to 20.0.6"
+            family="Update versions"
+            oldString="19.2.0"
+            replacement="20.0.6"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="15"
+            column="24"
+            startOffset="311"
+            endLine="15"
+            endColumn="32"
+            endOffset="319"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.compose.ui:ui-test-junit4 than 1.7.3 is available: 1.11.2">
+        <fix-replace
+            description="Change to 1.11.2"
+            family="Update versions"
+            oldString="1.7.3"
+            replacement="1.11.2"
+            priority="0"/>
+        <location
+            file="$HOME/kurio/gradle/libs.versions.toml"
+            line="19"
+            column="19"
+            startOffset="391"
+            endLine="19"
+            endColumn="26"
+            endOffset="398"/>
+    </incident>
+
+    <incident
+        id="UseTomlInstead"
+        severity="warning"
+        message="Use version catalog instead">
+        <fix-composite
+            description="Replace with new library catalog declaration for activity-compose"
+            robot="true">
+            <fix-replace
+                description="Replace with activityComposeVersion = &quot;1.9.3&quot;..."
+                robot="true"
+                oldString="_lint_insert_begin_"
+                replacement="activityComposeVersion = &quot;1.9.3&quot;&#xA;"
+                priority="0">
+                <range
+                    file="$HOME/kurio/gradle/libs.versions.toml"
+                    startOffset="11"
+                    endOffset="11"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with activity-compose = { module = &quot;androidx.activity:activity-compose&quot;, version.ref = &quot;activityComposeVersion&quot; }..."
+                robot="true"
+                oldString="_lint_insert_begin_"
+                replacement="activity-compose = { module = &quot;androidx.activity:activity-compose&quot;, version.ref = &quot;activityComposeVersion&quot; }&#xA;"
+                priority="0">
+                <range
+                    file="$HOME/kurio/gradle/libs.versions.toml"
+                    startOffset="433"
+                    endOffset="433"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with libs.activity.compose"
+                robot="true"
+                replacement="libs.activity.compose"
+                priority="0">
+                <range
+                    file="${:app-android*projectDir}/build.gradle.kts"
+                    startOffset="1397"
+                    endOffset="1439"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app-android*projectDir}/build.gradle.kts"
+            line="38"
+            column="28"
+            startOffset="1397"
+            endLine="38"
+            endColumn="70"
+            endOffset="1439"/>
+    </incident>
+
+</incidents>

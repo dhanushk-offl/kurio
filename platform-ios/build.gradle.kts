@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
 }
 
 kotlin {
@@ -9,15 +8,10 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        commonMain.dependencies {
+        iosMain.dependencies {
             implementation(project(":core"))
             implementation(project(":domain"))
             implementation(libs.koin.core)
         }
     }
-}
-
-android {
-    namespace = "com.dhanu.kurio.ios"
-    compileSdk = 35
 }

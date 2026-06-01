@@ -1,0 +1,2 @@
+
+<data_commonMain>:com.dhanu.kurio.data.audio:com.dhanu.kurio.data.di:com.dhanu.kurio.data.engine:com.dhanu.kurio.data.local:com.dhanu.kurio.data.local.dao:!com.dhanu.kurio.data.local.entity:com.dhanu.kurio.data.remote.api:com.dhanu.kurio.data.remote.dto:com.dhanu.kurio.data.repository:kurio.data.generated.resources

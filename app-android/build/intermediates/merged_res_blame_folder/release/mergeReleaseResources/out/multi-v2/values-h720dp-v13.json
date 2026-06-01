@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.dhanu.kurio.app-android-mergeReleaseResources-55:/values-h720dp-v13/values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "/home/dhanush/.gradle/caches/8.9/transforms/751f3ef09140037c87fcf1124cf95f5b/transformed/appcompat-1.7.0/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        }
+    ]
+}

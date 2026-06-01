@@ -10,7 +10,6 @@ import com.dhanu.kurio.domain.usecase.transcription.StopRecordingUseCase
 import com.dhanu.kurio.domain.usecase.transcription.ObserveTranscriptionStateUseCase
 import com.dhanu.kurio.domain.usecase.transcription.ObserveCurrentResultUseCase
 import com.dhanu.kurio.core.model.HistoryEntry
-import kotlinx.datetime.Clock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -84,7 +83,7 @@ class TranscriptionViewModel(
                     HistoryEntry(
                         id = result.id,
                         text = result.text,
-                        dateMillis = Clock.System.now().toEpochMilliseconds(),
+                        dateMillis = TimeUtils.now(),
                         durationMs = result.durationMs,
                         wordCount = result.wordCount,
                         characterCount = result.characterCount,

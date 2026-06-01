@@ -1,5 +1,6 @@
 plugins {
     id("kurio.kmp.library")
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -15,10 +16,12 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.napier)
             implementation(libs.room.runtime)
+            implementation(libs.room.ktx)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.datastore.preferences)
+            implementation("androidx.core:core-ktx:1.15.0")
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -28,4 +31,12 @@ kotlin {
 
 android {
     namespace = "com.dhanu.kurio.data"
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.room.compiler)
+    add("kspAndroid", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
+    add("kspIosX64", libs.room.compiler)
 }

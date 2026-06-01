@@ -1,0 +1,239 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.dhanu.kurio.debug"
+4    android:versionCode="1"
+5    android:versionName="1.0.0-debug" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+11-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:4:5-71
+11-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:4:22-68
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:5:5-67
+12-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:5:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:6:5-79
+13-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:6:22-76
+14    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+14-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:7:5-78
+14-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:7:22-75
+15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+15-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:8:5-77
+15-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:8:22-74
+16    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+16-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:9:5-88
+16-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:9:22-85
+17    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+17-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:10:5-77
+17-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:10:22-74
+18    <uses-permission android:name="android.permission.VIBRATE" />
+18-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:11:5-66
+18-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:11:22-63
+19    <uses-permission
+19-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:12:5-13:38
+20        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+20-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:12:22-78
+21        android:maxSdkVersion="28" />
+21-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:13:9-35
+22
+23    <uses-feature
+23-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:15:5-88
+24        android:name="android.hardware.microphone"
+24-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:15:19-61
+25        android:required="true" />
+25-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:15:62-85
+26
+27    <permission
+27-->[androidx.core:core:1.15.0] /home/dhanush/.gradle/caches/8.9/transforms/fd386e1659487eaea0d42699604fd240/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+28        android:name="com.dhanu.kurio.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+28-->[androidx.core:core:1.15.0] /home/dhanush/.gradle/caches/8.9/transforms/fd386e1659487eaea0d42699604fd240/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+29        android:protectionLevel="signature" />
+29-->[androidx.core:core:1.15.0] /home/dhanush/.gradle/caches/8.9/transforms/fd386e1659487eaea0d42699604fd240/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+30
+31    <uses-permission android:name="com.dhanu.kurio.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+31-->[androidx.core:core:1.15.0] /home/dhanush/.gradle/caches/8.9/transforms/fd386e1659487eaea0d42699604fd240/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+31-->[androidx.core:core:1.15.0] /home/dhanush/.gradle/caches/8.9/transforms/fd386e1659487eaea0d42699604fd240/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+32
+33    <application
+33-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:17:5-43:19
+34        android:name="com.dhanu.kurio.KurioApplication"
+34-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:18:9-41
+35        android:allowBackup="true"
+35-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:19:9-35
+36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+36-->[androidx.core:core:1.15.0] /home/dhanush/.gradle/caches/8.9/transforms/fd386e1659487eaea0d42699604fd240/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+37        android:debuggable="true"
+38        android:extractNativeLibs="false"
+39        android:icon="@mipmap/ic_launcher"
+39-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:20:9-43
+40        android:label="@string/app_name"
+40-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:21:9-41
+41        android:networkSecurityConfig="@xml/network_security_config"
+41-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:25:9-69
+42        android:roundIcon="@mipmap/ic_launcher_round"
+42-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:22:9-54
+43        android:supportsRtl="true"
+43-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:23:9-35
+44        android:theme="@style/Theme.Kurio" >
+44-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:24:9-43
+45        <activity
+45-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:27:9-36:20
+46            android:name="com.dhanu.kurio.MainActivity"
+46-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:28:13-41
+47            android:exported="true"
+47-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:29:13-36
+48            android:theme="@style/Theme.Kurio"
+48-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:30:13-47
+49            android:windowSoftInputMode="adjustResize" >
+49-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:31:13-55
+50            <intent-filter>
+50-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:32:13-35:29
+51                <action android:name="android.intent.action.MAIN" />
+51-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:33:17-69
+51-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:33:25-66
+52
+53                <category android:name="android.intent.category.LAUNCHER" />
+53-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:34:17-77
+53-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:34:27-74
+54            </intent-filter>
+55        </activity>
+56
+57        <service
+57-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:38:9-41:40
+58            android:name="com.dhanu.kurio.android.overlay.KurioOverlayService"
+58-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:39:13-79
+59            android:exported="false"
+59-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:41:13-37
+60            android:foregroundServiceType="microphone" />
+60-->/home/dhanush/kurio/app-android/src/androidMain/AndroidManifest.xml:40:13-55
+61        <service
+61-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:15:9-27:19
+62            android:name="com.dhanu.kurio.android.accessibility.KurioAccessibilityService"
+62-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:16:13-91
+63            android:exported="true"
+63-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:17:13-36
+64            android:label="@string/accessibility_service_label"
+64-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:18:13-64
+65            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+65-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:19:13-79
+66            <intent-filter>
+66-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:20:13-22:29
+67                <action android:name="android.accessibilityservice.AccessibilityService" />
+67-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:21:17-92
+67-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:21:25-89
+68            </intent-filter>
+69
+70            <meta-data
+70-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:24:13-26:72
+71                android:name="android.accessibilityservice"
+71-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:25:17-60
+72                android:resource="@xml/accessibility_service_config" />
+72-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:26:17-69
+73        </service>
+74        <service
+74-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:28:9-31:58
+75            android:name="com.dhanu.kurio.android.service.KurioForegroundService"
+75-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:29:13-82
+76            android:exported="false"
+76-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:30:13-37
+77            android:foregroundServiceType="microphone" />
+77-->[:platform-android] /home/dhanush/kurio/platform-android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:31:13-55
+78        <service
+78-->[androidx.room:room-runtime-android:2.7.0] /home/dhanush/.gradle/caches/8.9/transforms/f5911ec878bc22d4e883a30586603555/transformed/room-runtime-release/AndroidManifest.xml:24:9-28:63
+79            android:name="androidx.room.MultiInstanceInvalidationService"
+79-->[androidx.room:room-runtime-android:2.7.0] /home/dhanush/.gradle/caches/8.9/transforms/f5911ec878bc22d4e883a30586603555/transformed/room-runtime-release/AndroidManifest.xml:25:13-74
+80            android:directBootAware="true"
+80-->[androidx.room:room-runtime-android:2.7.0] /home/dhanush/.gradle/caches/8.9/transforms/f5911ec878bc22d4e883a30586603555/transformed/room-runtime-release/AndroidManifest.xml:26:13-43
+81            android:exported="false" />
+81-->[androidx.room:room-runtime-android:2.7.0] /home/dhanush/.gradle/caches/8.9/transforms/f5911ec878bc22d4e883a30586603555/transformed/room-runtime-release/AndroidManifest.xml:27:13-37
+82
+83        <provider
+83-->[org.jetbrains.compose.components:components-resources-android:1.7.3] /home/dhanush/.gradle/caches/8.9/transforms/fa39a1be9d97720794aacbd932d322af/transformed/library-release/AndroidManifest.xml:8:9-13:20
+84            android:name="org.jetbrains.compose.resources.AndroidContextProvider"
+84-->[org.jetbrains.compose.components:components-resources-android:1.7.3] /home/dhanush/.gradle/caches/8.9/transforms/fa39a1be9d97720794aacbd932d322af/transformed/library-release/AndroidManifest.xml:9:13-82
+85            android:authorities="com.dhanu.kurio.debug.resources.AndroidContextProvider"
+85-->[org.jetbrains.compose.components:components-resources-android:1.7.3] /home/dhanush/.gradle/caches/8.9/transforms/fa39a1be9d97720794aacbd932d322af/transformed/library-release/AndroidManifest.xml:10:13-84
+86            android:enabled="true"
+86-->[org.jetbrains.compose.components:components-resources-android:1.7.3] /home/dhanush/.gradle/caches/8.9/transforms/fa39a1be9d97720794aacbd932d322af/transformed/library-release/AndroidManifest.xml:11:13-35
+87            android:exported="false" >
+87-->[org.jetbrains.compose.components:components-resources-android:1.7.3] /home/dhanush/.gradle/caches/8.9/transforms/fa39a1be9d97720794aacbd932d322af/transformed/library-release/AndroidManifest.xml:12:13-37
+88        </provider>
+89
+90        <activity
+90-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/dhanush/.gradle/caches/8.9/transforms/4644bdb34c27994b32944236ed1684e1/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+91            android:name="androidx.compose.ui.tooling.PreviewActivity"
+91-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/dhanush/.gradle/caches/8.9/transforms/4644bdb34c27994b32944236ed1684e1/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+92            android:exported="true" />
+92-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/dhanush/.gradle/caches/8.9/transforms/4644bdb34c27994b32944236ed1684e1/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+93
+94        <provider
+94-->[androidx.emoji2:emoji2:1.3.0] /home/dhanush/.gradle/caches/8.9/transforms/4746898957800e29400dc70417c1a169/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+95            android:name="androidx.startup.InitializationProvider"
+95-->[androidx.emoji2:emoji2:1.3.0] /home/dhanush/.gradle/caches/8.9/transforms/4746898957800e29400dc70417c1a169/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+96            android:authorities="com.dhanu.kurio.debug.androidx-startup"
+96-->[androidx.emoji2:emoji2:1.3.0] /home/dhanush/.gradle/caches/8.9/transforms/4746898957800e29400dc70417c1a169/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+97            android:exported="false" >
+97-->[androidx.emoji2:emoji2:1.3.0] /home/dhanush/.gradle/caches/8.9/transforms/4746898957800e29400dc70417c1a169/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+98            <meta-data
+98-->[androidx.emoji2:emoji2:1.3.0] /home/dhanush/.gradle/caches/8.9/transforms/4746898957800e29400dc70417c1a169/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+99                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+99-->[androidx.emoji2:emoji2:1.3.0] /home/dhanush/.gradle/caches/8.9/transforms/4746898957800e29400dc70417c1a169/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+100                android:value="androidx.startup" />
+100-->[androidx.emoji2:emoji2:1.3.0] /home/dhanush/.gradle/caches/8.9/transforms/4746898957800e29400dc70417c1a169/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+101            <meta-data
+101-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/dhanush/.gradle/caches/8.9/transforms/cfbcedb776cf6fd472c7a3533d190288/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+102                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+102-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/dhanush/.gradle/caches/8.9/transforms/cfbcedb776cf6fd472c7a3533d190288/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+103                android:value="androidx.startup" />
+103-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/dhanush/.gradle/caches/8.9/transforms/cfbcedb776cf6fd472c7a3533d190288/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+104            <meta-data
+104-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+105                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+105-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+106                android:value="androidx.startup" />
+106-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+107        </provider>
+108
+109        <receiver
+109-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+110            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+110-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+111            android:directBootAware="false"
+111-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+112            android:enabled="true"
+112-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+113            android:exported="true"
+113-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+114            android:permission="android.permission.DUMP" >
+114-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+115            <intent-filter>
+115-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+116                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+117            </intent-filter>
+118            <intent-filter>
+118-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+119                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+119-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+119-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+120            </intent-filter>
+121            <intent-filter>
+121-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+122                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+122-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+122-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+123            </intent-filter>
+124            <intent-filter>
+124-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+125                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+125-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+125-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/dhanush/.gradle/caches/8.9/transforms/c6d8dfec1166ef0a3214208216bcf46f/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+126            </intent-filter>
+127        </receiver>
+128    </application>
+129
+130</manifest>
