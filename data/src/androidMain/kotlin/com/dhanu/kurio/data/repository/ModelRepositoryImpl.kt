@@ -22,6 +22,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.File
 import java.security.MessageDigest
+import kotlin.math.absoluteValue
 
 class ModelRepositoryImpl(
     private val modelDao: ModelDao,
@@ -57,6 +58,10 @@ class ModelRepositoryImpl(
     override suspend fun downloadModel(modelId: String): Result<Unit> {
         return try {
             val model = modelDao.getById(modelId) ?: return Result.failure(Exception("Model not found"))
+            if (model.downloadUrl.isBlank()) {
+                modelDao.updateStatus(modelId, ModelStatus.ERROR.name)
+                return Result.failure(Exception("Model download URL is not available"))
+            }
             val file = File(modelsDir, "${model.id}.bin")
 
             modelDao.updateStatus(modelId, ModelStatus.DOWNLOADING.name)
@@ -67,9 +72,8 @@ class ModelRepositoryImpl(
                     val totalBytes = response.size.toLong()
                     var downloaded = 0L
                     val chunkSize = 8192
-                    val outputStream = file.outputStream()
-
-                    response.inputStream().use { input ->
+                    file.outputStream().use { outputStream ->
+                        response.inputStream().use { input ->
                         val buffer = ByteArray(chunkSize)
                         var bytesRead: Int
                         while (input.read(buffer).also { bytesRead = it } != -1) {
@@ -83,15 +87,14 @@ class ModelRepositoryImpl(
                             ))
                         }
                     }
-
-                    outputStream.close()
+                    }
 
                     modelDao.updateFilePath(modelId, file.absolutePath)
                     modelDao.updateStatus(modelId, ModelStatus.VERIFYING.name)
 
-                    val isValid = verifyChecksum(file, model.checksum)
+                    val isValid = validateModelBinary(file, model)
                     if (isValid) {
-                        modelDao.updateStatus(modelId, ModelStatus.VERIFIED.name)
+                        modelDao.updateStatus(modelId, ModelStatus.INSTALLED.name)
                     } else {
                         file.delete()
                         modelDao.updateStatus(modelId, ModelStatus.CORRUPTED.name)
@@ -125,7 +128,7 @@ class ModelRepositoryImpl(
     override suspend fun cancelDownload(modelId: String) {
         downloadJobs[modelId]?.cancel()
         downloadJobs.remove(modelId)
-        modelDao.updateStatus(modelId, ModelStatus.NOT_DOWNLOADED.name)
+        modelDao.updateStatus(modelId, ModelStatus.NOT_INSTALLED.name)
         val file = File(modelsDir, "${modelId}.bin")
         if (file.exists()) file.delete()
         modelDao.updateFilePath(modelId, null)
@@ -147,13 +150,18 @@ class ModelRepositoryImpl(
         val model = modelDao.getById(modelId) ?: return false
         val file = model.filePath?.let { File(it) } ?: return false
         if (!file.exists()) return false
-        return verifyChecksum(file, model.checksum)
+        return validateModelBinary(file, model)
     }
 
     override suspend fun activateModel(modelId: String) {
+        val target = modelDao.getById(modelId) ?: return
+        if (!validateModelBinary(target.filePath?.let(::File), target)) {
+            modelDao.updateStatus(modelId, ModelStatus.CORRUPTED.name)
+            return
+        }
         val currentActive = modelDao.getActive()
         if (currentActive != null) {
-            modelDao.updateStatus(currentActive.id, ModelStatus.DOWNLOADED.name)
+            modelDao.updateStatus(currentActive.id, ModelStatus.IDLE.name)
         }
         modelDao.updateStatus(modelId, ModelStatus.ACTIVE.name)
     }
@@ -185,7 +193,7 @@ class ModelRepositoryImpl(
                     checksum = dto.checksum,
                     version = dto.version,
                     recommendedDeviceClass = dto.recommendedDeviceClass,
-                    status = ModelStatus.NOT_DOWNLOADED.name,
+                    status = ModelStatus.NOT_INSTALLED.name,
                     filePath = null,
                     isExperimental = dto.isExperimental
                 )
@@ -206,13 +214,55 @@ class ModelRepositoryImpl(
         }
     }
 
+    private fun validateModelBinary(file: File?, model: ModelEntity): Boolean {
+        if (file == null || !file.exists() || !file.isFile) {
+            Napier.w(tag = "ModelValidation") { "Model file is missing for ${model.id}" }
+            return false
+        }
+        if (!file.absolutePath.startsWith(File(modelsDir).absolutePath)) {
+            Napier.w(tag = "ModelValidation") { "Model file is outside managed storage for ${model.id}" }
+            return false
+        }
+        if (!isSupportedModelFile(file)) {
+            Napier.w(tag = "ModelValidation") { "Unsupported model file type: ${file.name}" }
+            return false
+        }
+        if (!hasPlausibleSize(file, model.sizeBytes)) {
+            Napier.w(tag = "ModelValidation") { "Model size validation failed for ${model.id}" }
+            return false
+        }
+        if (model.provider.isBlank() || model.version.isBlank()) {
+            Napier.w(tag = "ModelValidation") { "Model metadata validation failed for ${model.id}" }
+            return false
+        }
+        return verifyChecksum(file, model.checksum)
+    }
+
+    private fun isSupportedModelFile(file: File): Boolean {
+        return file.extension.lowercase() in setOf("bin", "gguf")
+    }
+
+    private fun hasPlausibleSize(file: File, expectedSizeBytes: Long): Boolean {
+        if (expectedSizeBytes <= 0L) return file.length() > 0L
+        val deltaRatio = (file.length() - expectedSizeBytes).absoluteValue.toDouble() / expectedSizeBytes.toDouble()
+        return deltaRatio <= 0.25
+    }
+
     private fun verifyChecksum(file: File, expectedChecksum: String): Boolean {
-        if (expectedChecksum.isEmpty()) return true
+        if (expectedChecksum.isBlank()) {
+            Napier.w(tag = "Checksum") { "Checksum missing for ${file.name}; accepted only after size and metadata validation" }
+            return true
+        }
         return try {
             val digest = MessageDigest.getInstance("SHA-256")
-            val fileBytes = file.readBytes()
-            val hash = digest.digest(fileBytes)
-            val hexString = hash.joinToString("") { "%02x".format(it) }
+            file.inputStream().use { input ->
+                val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+                var bytesRead: Int
+                while (input.read(buffer).also { bytesRead = it } != -1) {
+                    digest.update(buffer, 0, bytesRead)
+                }
+            }
+            val hexString = digest.digest().joinToString("") { "%02x".format(it) }
             hexString == expectedChecksum
         } catch (e: Exception) {
             Napier.e(throwable = e, tag = "Checksum") { "Checksum verification failed" }

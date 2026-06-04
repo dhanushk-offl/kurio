@@ -18,22 +18,35 @@ data class SpeechModel(
     val checksum: String,
     val version: String,
     val recommendedDeviceClass: DeviceClass,
-    val status: ModelStatus = ModelStatus.NOT_DOWNLOADED,
+    val status: ModelStatus = ModelStatus.NOT_INSTALLED,
     val downloadProgress: Float = 0f,
     val isExperimental: Boolean = false
 )
 
 @Serializable
 enum class ModelStatus {
-    NOT_DOWNLOADED,
+    NOT_INSTALLED,
     DOWNLOADING,
     PAUSED,
     DOWNLOADED,
     VERIFYING,
-    VERIFIED,
+    INSTALLED,
+    LOADING,
+    WARM,
+    ACTIVE,
+    IDLE,
+    UNLOADED,
+    DELETED,
     CORRUPTED,
-    ERROR,
-    ACTIVE
+    ERROR;
+
+    companion object {
+        fun fromPersisted(value: String): ModelStatus = when (value) {
+            "NOT_DOWNLOADED" -> NOT_INSTALLED
+            "VERIFIED" -> INSTALLED
+            else -> entries.firstOrNull { it.name == value } ?: NOT_INSTALLED
+        }
+    }
 }
 
 @Serializable

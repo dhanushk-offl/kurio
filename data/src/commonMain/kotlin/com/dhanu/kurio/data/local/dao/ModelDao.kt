@@ -39,6 +39,6 @@ interface ModelDao {
     @Query("SELECT * FROM models WHERE status = 'ACTIVE' LIMIT 1")
     suspend fun getActive(): ModelEntity?
 
-    @Query("UPDATE models SET status = 'NOT_DOWNLOADED' WHERE id = :modelId")
+    @Query("UPDATE models SET status = 'NOT_INSTALLED' WHERE id = :modelId")
     suspend fun resetStatus(modelId: String)
 }

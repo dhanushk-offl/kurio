@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.napier)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.navigation.compose)
             implementation("androidx.activity:activity-compose:1.9.3")
             implementation(compose.runtime)
             implementation(compose.foundation)

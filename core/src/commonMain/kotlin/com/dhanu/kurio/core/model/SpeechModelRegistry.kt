@@ -18,7 +18,7 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "1.0.0",
                 recommendedDeviceClass = DeviceClass.LOW_END,
-                status = ModelStatus.NOT_DOWNLOADED,
+                status = ModelStatus.NOT_INSTALLED,
                 isExperimental = false
             ),
             SpeechModel(
@@ -36,7 +36,7 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "1.0.0",
                 recommendedDeviceClass = DeviceClass.MID_RANGE,
-                status = ModelStatus.NOT_DOWNLOADED,
+                status = ModelStatus.NOT_INSTALLED,
                 isExperimental = false
             ),
             SpeechModel(
@@ -54,7 +54,7 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "1.0.0",
                 recommendedDeviceClass = DeviceClass.MID_RANGE,
-                status = ModelStatus.NOT_DOWNLOADED,
+                status = ModelStatus.NOT_INSTALLED,
                 isExperimental = false
             ),
             SpeechModel(
@@ -72,7 +72,7 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "1.0.0",
                 recommendedDeviceClass = DeviceClass.HIGH_END,
-                status = ModelStatus.NOT_DOWNLOADED,
+                status = ModelStatus.NOT_INSTALLED,
                 isExperimental = false
             ),
             SpeechModel(
@@ -90,7 +90,7 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "0.1.0",
                 recommendedDeviceClass = DeviceClass.LOW_END,
-                status = ModelStatus.NOT_DOWNLOADED,
+                status = ModelStatus.NOT_INSTALLED,
                 isExperimental = true
             ),
             SpeechModel(
@@ -108,7 +108,7 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "0.1.0",
                 recommendedDeviceClass = DeviceClass.MID_RANGE,
-                status = ModelStatus.NOT_DOWNLOADED,
+                status = ModelStatus.NOT_INSTALLED,
                 isExperimental = true
             ),
             SpeechModel(
@@ -126,7 +126,7 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "0.3.0",
                 recommendedDeviceClass = DeviceClass.LOW_END,
-                status = ModelStatus.NOT_DOWNLOADED,
+                status = ModelStatus.NOT_INSTALLED,
                 isExperimental = true
             )
         )

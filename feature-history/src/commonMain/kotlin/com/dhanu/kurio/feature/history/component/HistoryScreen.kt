@@ -67,8 +67,8 @@ fun HistoryScreen(
             placeholder = "Search transcriptions...",
             trailingIcon = {
                 if (state.searchQuery.isNotEmpty()) {
-                    IconButton(onClick = { onSearchQueryChange("") }) {
-                        Text("✕", fontSize = 16.sp)
+                    TextButton(onClick = { onSearchQueryChange("") }) {
+                        Text("Clear", fontSize = 12.sp)
                     }
                 }
             }
@@ -89,8 +89,6 @@ fun HistoryScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("📜", fontSize = 48.sp)
-                    Spacer(Modifier.height(16.dp))
                     Text(
                         text = "No transcriptions yet",
                         fontSize = 18.sp,
@@ -184,15 +182,9 @@ private fun HistoryItem(
                 )
                 Spacer(Modifier.weight(1f))
                 Row {
-                    IconButton(onClick = onCopy, modifier = Modifier.size(32.dp)) {
-                        Text("📋", fontSize = 14.sp)
-                    }
-                    IconButton(onClick = onShare, modifier = Modifier.size(32.dp)) {
-                        Text("📤", fontSize = 14.sp)
-                    }
-                    IconButton(onClick = onDelete, modifier = Modifier.size(32.dp)) {
-                        Text("🗑", fontSize = 14.sp)
-                    }
+                    TextButton(onClick = onCopy) { Text("Copy", fontSize = 12.sp) }
+                    TextButton(onClick = onShare) { Text("Share", fontSize = 12.sp) }
+                    TextButton(onClick = onDelete) { Text("Delete", fontSize = 12.sp, color = KurioColors.Error) }
                 }
             }
         }

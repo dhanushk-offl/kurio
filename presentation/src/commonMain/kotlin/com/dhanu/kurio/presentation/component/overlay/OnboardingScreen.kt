@@ -53,10 +53,7 @@ private fun WelcomeStep(onNext: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "🎙️",
-            fontSize = 72.sp
-        )
+        OnboardingMark("K")
         Spacer(Modifier.height(24.dp))
         Text(
             text = "Welcome to Kurio",
@@ -83,10 +80,7 @@ private fun PermissionsStep(onNext: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "🎤",
-            fontSize = 64.sp
-        )
+        OnboardingMark("Mic")
         Spacer(Modifier.height(24.dp))
         Text(
             text = "Microphone Access",
@@ -115,10 +109,7 @@ private fun ModelDownloadStep(onNext: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "📥",
-            fontSize = 64.sp
-        )
+        OnboardingMark("Model")
         Spacer(Modifier.height(24.dp))
         Text(
             text = "Download a Model",
@@ -161,10 +152,7 @@ private fun CompletionStep(onComplete: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "✨",
-            fontSize = 72.sp
-        )
+        OnboardingMark("Ready")
         Spacer(Modifier.height(24.dp))
         Text(
             text = "You're Ready!",
@@ -205,5 +193,23 @@ private fun StepIndicator(currentStep: OnboardingStep) {
                     )
             )
         }
+    }
+}
+
+@Composable
+private fun OnboardingMark(text: String) {
+    Box(
+        modifier = Modifier
+            .size(96.dp)
+            .shadow(2.dp, CircleShape)
+            .background(KurioColors.Surface, CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = text,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = KurioColors.Primary
+        )
     }
 }

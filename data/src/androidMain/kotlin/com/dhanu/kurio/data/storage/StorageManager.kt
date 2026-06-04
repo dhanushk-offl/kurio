@@ -103,7 +103,7 @@ class StorageManager(
             val models = modelDao.getAll()
             for (model in models) {
                 modelDao.updateFilePath(model.id, null)
-                modelDao.updateStatus(model.id, "NOT_DOWNLOADED")
+                modelDao.updateStatus(model.id, "NOT_INSTALLED")
             }
             Napier.d(tag = "StorageManager") { "All speech model binaries deleted and status reset" }
         } catch (e: Exception) {

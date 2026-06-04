@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.dhanu.kurio.app-android-mergeDebugResources-59:/values-land/values-land.xml",
+            "outputFile": "com.dhanu.kurio.app-android-mergeDebugResources-65:/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/home/dhanush/.gradle/caches/8.9/transforms/751f3ef09140037c87fcf1124cf95f5b/transformed/appcompat-1.7.0/res/values-land/values-land.xml",
+                    "source": "/home/dhanush/.gradle/caches/8.9/transforms/015e173079aa5b3dc0d3f4bc5c59ec13/transformed/appcompat-1.7.0/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",

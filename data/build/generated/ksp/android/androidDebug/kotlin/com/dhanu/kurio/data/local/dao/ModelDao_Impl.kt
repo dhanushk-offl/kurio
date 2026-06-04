@@ -512,7 +512,7 @@ public class ModelDao_Impl(
   }
 
   public override suspend fun resetStatus(modelId: String) {
-    val _sql: String = "UPDATE models SET status = 'NOT_DOWNLOADED' WHERE id = ?"
+    val _sql: String = "UPDATE models SET status = 'NOT_INSTALLED' WHERE id = ?"
     return performSuspending(__db, false, true) { _connection ->
       val _stmt: SQLiteStatement = _connection.prepare(_sql)
       try {

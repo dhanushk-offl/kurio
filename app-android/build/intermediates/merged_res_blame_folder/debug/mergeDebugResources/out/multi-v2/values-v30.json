@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.dhanu.kurio.app-android-mergeDebugResources-59:/values-v30/values-v30.xml",
+            "outputFile": "com.dhanu.kurio.app-android-mergeDebugResources-65:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "/home/dhanush/.gradle/caches/8.9/transforms/87633f086f3b58c288655c25a9f25c66/transformed/material3-release/res/values-v30/values-v30.xml",
+                    "source": "/home/dhanush/.gradle/caches/8.9/transforms/df378e97974a1db8b2f9895b271f72e8/transformed/material3-release/res/values-v30/values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

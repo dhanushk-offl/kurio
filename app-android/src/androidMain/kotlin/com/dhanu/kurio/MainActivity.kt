@@ -4,36 +4,52 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.dhanu.kurio.core.design.color.KurioColors
+import com.dhanu.kurio.core.design.spacing.KurioSpacing
 import com.dhanu.kurio.core.design.theme.KurioTheme
-import com.dhanu.kurio.feature.home.component.HomeScreen
-import com.dhanu.kurio.feature.home.viewmodel.HomeViewModel
+import com.dhanu.kurio.core.model.StorageUsage
 import com.dhanu.kurio.feature.history.component.HistoryScreen
 import com.dhanu.kurio.feature.history.viewmodel.HistoryViewModel
+import com.dhanu.kurio.feature.home.component.HomeScreen
+import com.dhanu.kurio.feature.home.viewmodel.HomeViewModel
 import com.dhanu.kurio.feature.models.component.ModelsScreen
 import com.dhanu.kurio.feature.models.viewmodel.ModelsViewModel
 import com.dhanu.kurio.feature.settings.component.SettingsScreen
 import com.dhanu.kurio.feature.settings.viewmodel.SettingsViewModel
 import com.dhanu.kurio.feature.transcription.component.TranscriptionScreen
 import com.dhanu.kurio.feature.transcription.viewmodel.TranscriptionViewModel
+import com.dhanu.kurio.presentation.component.card.KurioCard
+import com.dhanu.kurio.presentation.component.overlay.OnboardingScreen
+import com.dhanu.kurio.presentation.component.screen.KurioScreen
 import com.dhanu.kurio.presentation.component.splash.AnimatedSplashScreen
+import com.dhanu.kurio.presentation.navigation.Screen
 import org.koin.compose.koinInject
-
-enum class AppScreen {
-    HOME, TRANSCRIPTION, HISTORY, MODELS, SETTINGS, ABOUT
-}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,26 +74,42 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun KurioApp() {
-    var currentScreen by remember { mutableStateOf(AppScreen.HOME) }
+fun KurioApp(
+    navController: NavHostController = rememberNavController(),
+    isOnboardingCompleted: Boolean = true
+) {
+    val startRoute = if (isOnboardingCompleted) Screen.Home.route else Screen.Onboarding.route
 
-    when (currentScreen) {
-        AppScreen.HOME -> {
+    NavHost(
+        navController = navController,
+        startDestination = startRoute
+    ) {
+        composable(Screen.Onboarding.route) {
+            OnboardingScreen(
+                onComplete = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Onboarding.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable(Screen.Home.route) {
             val viewModel: HomeViewModel = koinInject()
             LaunchedEffect(Unit) { viewModel.initialize() }
             val state by viewModel.uiState.collectAsState()
 
             HomeScreen(
                 state = state,
-                onNavigateToTranscription = { currentScreen = AppScreen.TRANSCRIPTION },
-                onNavigateToHistory = { currentScreen = AppScreen.HISTORY },
-                onNavigateToModels = { currentScreen = AppScreen.MODELS },
-                onNavigateToSettings = { currentScreen = AppScreen.SETTINGS },
-                onNavigateToAbout = { currentScreen = AppScreen.ABOUT }
+                onNavigateToTranscription = { navController.navigateSingleTop(Screen.Transcription) },
+                onNavigateToHistory = { navController.navigateSingleTop(Screen.History) },
+                onNavigateToModels = { navController.navigateSingleTop(Screen.Models) },
+                onNavigateToSettings = { navController.navigateSingleTop(Screen.Settings) },
+                onNavigateToAbout = { navController.navigateSingleTop(Screen.About) }
             )
         }
 
-        AppScreen.TRANSCRIPTION -> {
+        composable(Screen.Transcription.route) {
             val viewModel: TranscriptionViewModel = koinInject()
             LaunchedEffect(Unit) { viewModel.initialize() }
             val state by viewModel.uiState.collectAsState()
@@ -87,14 +119,14 @@ fun KurioApp() {
                 onStartRecording = { viewModel.onStartRecording() },
                 onStopRecording = { viewModel.onStopRecording() },
                 onCancel = { viewModel.onCancel() },
-                onBack = { currentScreen = AppScreen.HOME },
+                onBack = { navController.popBackStack() },
                 onCopy = { },
                 onShare = { },
                 onEdit = { }
             )
         }
 
-        AppScreen.HISTORY -> {
+        composable(Screen.History.route) {
             val viewModel: HistoryViewModel = koinInject()
             LaunchedEffect(Unit) { viewModel.initialize() }
             val state by viewModel.uiState.collectAsState()
@@ -104,13 +136,13 @@ fun KurioApp() {
                 onSearchQueryChange = { viewModel.onSearchQueryChange(it) },
                 onDeleteEntry = { viewModel.onDeleteEntry(it) },
                 onClearHistory = { viewModel.onClearHistory() },
-                onBack = { currentScreen = AppScreen.HOME },
+                onBack = { navController.popBackStack() },
                 onCopy = { },
                 onShare = { }
             )
         }
 
-        AppScreen.MODELS -> {
+        composable(Screen.Models.route) {
             val viewModel: ModelsViewModel = koinInject()
             LaunchedEffect(Unit) { viewModel.initialize() }
             val state by viewModel.uiState.collectAsState()
@@ -122,11 +154,11 @@ fun KurioApp() {
                 onResume = { viewModel.onResumeDownload(it) },
                 onDelete = { viewModel.onDeleteModel(it) },
                 onActivate = { viewModel.onActivateModel(it) },
-                onBack = { currentScreen = AppScreen.HOME }
+                onBack = { navController.popBackStack() }
             )
         }
 
-        AppScreen.SETTINGS -> {
+        composable(Screen.Settings.route) {
             val viewModel: SettingsViewModel = koinInject()
             LaunchedEffect(Unit) { viewModel.initialize() }
             val state by viewModel.uiState.collectAsState()
@@ -140,86 +172,128 @@ fun KurioApp() {
                 onToggleNotifications = { viewModel.onToggleNotifications(it) },
                 onUpdateReleaseChannel = { viewModel.onUpdateReleaseChannel(it) },
                 onClearCache = { viewModel.onClearCache() },
-                onBack = { currentScreen = AppScreen.HOME },
-                onNavigateToAbout = { currentScreen = AppScreen.ABOUT },
-                onNavigateToChangelog = { }
+                onBack = { navController.popBackStack() },
+                onNavigateToAbout = { navController.navigateSingleTop(Screen.About) },
+                onNavigateToChangelog = { navController.navigateSingleTop(Screen.Updates) }
             )
         }
 
-        AppScreen.ABOUT -> {
-            AboutScreen(onBack = { currentScreen = AppScreen.HOME })
+        composable(Screen.Storage.route) {
+            val viewModel: SettingsViewModel = koinInject()
+            LaunchedEffect(Unit) { viewModel.initialize() }
+            val state by viewModel.uiState.collectAsState()
+            StorageScreen(storageUsage = state.storageUsage)
+        }
+
+        composable(Screen.Updates.route) {
+            UpdatesScreen()
+        }
+
+        composable(Screen.About.route) {
+            AboutScreen()
+        }
+    }
+}
+
+private fun NavHostController.navigateSingleTop(screen: Screen) {
+    navigate(screen.route) {
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
+@Composable
+private fun StorageScreen(storageUsage: StorageUsage) {
+    KurioScreen(
+        title = "Storage",
+        subtitle = "Model binaries, cache, and transcription history."
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(KurioSpacing.Md)) {
+            StorageRow("Models", storageUsage.formattedModels)
+            StorageRow("History", storageUsage.formattedHistory)
+            StorageRow("Cache", storageUsage.formattedCache)
+            StorageRow("Total", storageUsage.formattedTotal, prominent = true)
         }
     }
 }
 
 @Composable
-private fun AboutScreen(onBack: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(KurioColors.Background)
-            .padding(20.dp)
+private fun StorageRow(label: String, value: String, prominent: Boolean = false) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = KurioColors.Surface),
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Spacer(Modifier.height(48.dp))
-
-        Text(
-            text = "About",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = KurioColors.PrimaryText
-        )
-
-        Spacer(Modifier.height(24.dp))
-
-        Card(
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = KurioColors.Surface),
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .shadow(2.dp, RoundedCornerShape(16.dp))
+                .padding(KurioSpacing.Xl),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(
-                modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Kurio",
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = KurioColors.PrimaryText
-                )
-                Spacer(Modifier.height(4.dp))
-                Text(
-                    text = "Speak. Transcribe. Continue.",
-                    fontSize = 14.sp,
-                    color = KurioColors.SecondaryText
-                )
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    text = "Version 1.0.0",
-                    fontSize = 15.sp,
-                    color = KurioColors.PrimaryText
-                )
-                Spacer(Modifier.height(24.dp))
-                Text(
-                    text = "Powered by Whisper.cpp, Moonshine, and Vosk.\nAll transcription runs locally on your device.\nNo data ever leaves your phone.",
-                    fontSize = 13.sp,
-                    color = KurioColors.SecondaryText,
-                    lineHeight = 20.sp,
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyLarge,
+                color = KurioColors.PrimaryText,
+                fontWeight = if (prominent) FontWeight.SemiBold else FontWeight.Normal
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyLarge,
+                color = KurioColors.SecondaryText,
+                fontWeight = if (prominent) FontWeight.SemiBold else FontWeight.Normal
+            )
         }
+    }
+}
 
-        Spacer(Modifier.weight(1f))
+@Composable
+private fun UpdatesScreen() {
+    KurioScreen(
+        title = "Updates",
+        subtitle = "Release channel, update checks, and version history."
+    ) {
+        KurioCard(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = "Kurio 1.0.0",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = KurioColors.PrimaryText
+            )
+            Spacer(Modifier.height(KurioSpacing.Sm))
+            Text(
+                text = "Initial Android production shell with local-first transcription, model lifecycle management, overlay services, and private on-device history.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = KurioColors.SecondaryText
+            )
+        }
+    }
+}
 
-        Text(
-            text = "© 2026 Dhanush. All rights reserved.",
-            fontSize = 12.sp,
-            color = KurioColors.SecondaryText,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-
-        Spacer(Modifier.height(32.dp))
+@Composable
+private fun AboutScreen() {
+    KurioScreen(
+        title = "About",
+        subtitle = "Private speech transcription built for speed."
+    ) {
+        KurioCard(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = "Kurio",
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                color = KurioColors.PrimaryText
+            )
+            Spacer(Modifier.height(KurioSpacing.Sm))
+            Text(
+                text = "Version 1.0.0",
+                style = MaterialTheme.typography.bodyLarge,
+                color = KurioColors.PrimaryText
+            )
+            Spacer(Modifier.height(KurioSpacing.Xxl))
+            Text(
+                text = "All transcription is designed to run locally. Speech models are stored as binary inference assets and are never serialized into app settings or history storage.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = KurioColors.SecondaryText
+            )
+        }
     }
 }

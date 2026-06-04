@@ -42,7 +42,7 @@ data class ModelEntity(
         checksum = checksum,
         version = version,
         recommendedDeviceClass = DeviceClass.valueOf(recommendedDeviceClass),
-        status = ModelStatus.valueOf(status),
+        status = ModelStatus.fromPersisted(status),
         isExperimental = isExperimental
     )
 

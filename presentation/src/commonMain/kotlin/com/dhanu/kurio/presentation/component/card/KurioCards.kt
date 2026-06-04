@@ -1,16 +1,15 @@
 package com.dhanu.kurio.presentation.component.card
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.dhanu.kurio.core.design.color.KurioColors
+import com.dhanu.kurio.core.design.spacing.KurioSpacing
 
 @Composable
 fun KurioCard(
@@ -19,14 +18,19 @@ fun KurioCard(
 ) {
     androidx.compose.material3.Card(
         modifier = modifier
-            .shadow(2.dp, RoundedCornerShape(16.dp), spotColor = KurioColors.Accent.copy(alpha = 0.08f)),
-        shape = RoundedCornerShape(16.dp),
-        colors = androidx.compose.material3.CardDefaults.cardColors(
+            .shadow(
+                elevation = KurioSpacing.Xs,
+                shape = MaterialTheme.shapes.large,
+                spotColor = KurioColors.Primary.copy(alpha = 0.06f),
+                ambientColor = KurioColors.Primary.copy(alpha = 0.04f)
+            ),
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(
             containerColor = KurioColors.Surface
         )
     ) {
         Column(
-            modifier = Modifier.padding(20.dp),
+            modifier = Modifier.padding(KurioSpacing.Xl),
             content = content
         )
     }
@@ -42,15 +46,14 @@ fun KurioStatCard(
         Text(
             text = label,
             color = KurioColors.SecondaryText,
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Medium,
-            letterSpacing = 0.5.sp
+            style = MaterialTheme.typography.labelMedium,
+            fontWeight = FontWeight.Medium
         )
-        Spacer(Modifier.height(4.dp))
+        Spacer(Modifier.height(KurioSpacing.Xs))
         Text(
             text = value,
             color = KurioColors.PrimaryText,
-            fontSize = 22.sp,
+            style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold
         )
     }

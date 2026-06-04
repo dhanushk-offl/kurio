@@ -1,27 +1,36 @@
 package com.dhanu.kurio.feature.home.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.dhanu.kurio.core.design.color.KurioColors
+import com.dhanu.kurio.core.design.spacing.KurioSpacing
 import com.dhanu.kurio.core.model.TranscriptionState
-import com.dhanu.kurio.core.util.StorageUtils
 import com.dhanu.kurio.feature.home.viewmodel.HomeUiState
-import com.dhanu.kurio.presentation.component.card.KurioStatCard
+import com.dhanu.kurio.presentation.component.card.KurioCard
 
 @Composable
 fun HomeScreen(
@@ -37,13 +46,12 @@ fun HomeScreen(
             .fillMaxSize()
             .background(KurioColors.Background)
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = KurioSpacing.ScreenHorizontal),
+        verticalArrangement = Arrangement.spacedBy(KurioSpacing.Xl)
     ) {
-        Spacer(Modifier.height(60.dp))
+        Spacer(Modifier.height(KurioSpacing.ScreenTop))
 
-        HeaderSection(state = state)
-
-        Spacer(Modifier.height(32.dp))
+        ReadinessHeader(state)
 
         QuickActionsSection(
             state = state,
@@ -52,58 +60,64 @@ fun HomeScreen(
             onModels = onNavigateToModels
         )
 
-        Spacer(Modifier.height(24.dp))
+        StatusGrid(state)
 
-        StorageSection(state = state)
+        RecentActivitySection(state)
 
-        Spacer(Modifier.height(24.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(KurioSpacing.Md)) {
+            OutlinedButton(
+                onClick = onNavigateToSettings,
+                modifier = Modifier.weight(1f),
+                shape = MaterialTheme.shapes.medium,
+                border = BorderStroke(KurioSpacing.None, KurioColors.Border)
+            ) {
+                Text("Settings")
+            }
+            OutlinedButton(
+                onClick = onNavigateToAbout,
+                modifier = Modifier.weight(1f),
+                shape = MaterialTheme.shapes.medium,
+                border = BorderStroke(KurioSpacing.None, KurioColors.Border)
+            ) {
+                Text("About")
+            }
+        }
 
-        BottomActionsSection(
-            onSettings = onNavigateToSettings,
-            onAbout = onNavigateToAbout
-        )
-
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(KurioSpacing.Xxl))
     }
 }
 
 @Composable
-private fun HeaderSection(state: HomeUiState) {
-    Column {
-        Text(
-            text = "Kurio",
-            fontSize = 34.sp,
-            fontWeight = FontWeight.Bold,
-            color = KurioColors.PrimaryText,
-            letterSpacing = (-0.5).sp
-        )
-        Spacer(Modifier.height(4.dp))
-        Text(
-            text = "Speak. Transcribe. Continue.",
-            fontSize = 16.sp,
-            color = KurioColors.SecondaryText,
-            letterSpacing = 0.3.sp
-        )
-        Spacer(Modifier.height(24.dp))
-
-        if (state.hasUpdate) {
-            UpdateBanner(version = state.updateVersion ?: "")
-            Spacer(Modifier.height(16.dp))
-        }
-
+private fun ReadinessHeader(state: HomeUiState) {
+    KurioCard(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            verticalAlignment = Alignment.Top
         ) {
-            KurioStatCard(
-                modifier = Modifier.weight(1f),
-                label = "ACTIVE MODEL",
-                value = state.activeModel?.name ?: "None"
-            )
-            KurioStatCard(
-                modifier = Modifier.weight(1f),
-                label = "HISTORY",
-                value = "${state.historyCount}/10"
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "Kurio is ready.",
+                    style = MaterialTheme.typography.displaySmall,
+                    fontWeight = FontWeight.Bold,
+                    color = KurioColors.PrimaryText
+                )
+                Spacer(Modifier.height(KurioSpacing.Sm))
+                Text(
+                    text = state.activeModel?.name ?: "Choose a local speech model to begin.",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = KurioColors.SecondaryText
+                )
+            }
+            Spacer(Modifier.width(KurioSpacing.Md))
+            StatusPill("Ready", KurioColors.Success)
+        }
+        if (state.hasUpdate) {
+            Spacer(Modifier.height(KurioSpacing.Lg))
+            Text(
+                text = "Update ${state.updateVersion.orEmpty()} is available",
+                style = MaterialTheme.typography.bodyMedium,
+                color = KurioColors.Accent,
+                fontWeight = FontWeight.SemiBold
             )
         }
     }
@@ -116,152 +130,166 @@ private fun QuickActionsSection(
     onHistory: () -> Unit,
     onModels: () -> Unit
 ) {
-    Column {
-        Text(
-            text = "Quick Actions",
-            fontSize = 14.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = KurioColors.SecondaryText,
-            letterSpacing = 0.5.sp
+    SectionTitle("Quick Actions")
+    Row(horizontalArrangement = Arrangement.spacedBy(KurioSpacing.Md)) {
+        ActionTile(
+            title = if (state.transcriptionState == TranscriptionState.LISTENING) "Recording" else "Record",
+            label = if (state.transcriptionState == TranscriptionState.LISTENING) "Tap to manage" else "Start dictation",
+            onClick = onTranscribe,
+            modifier = Modifier.weight(1f),
+            isPrimary = true
         )
-        Spacer(Modifier.height(12.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            ActionButton(
-                modifier = Modifier.weight(1f),
-                emoji = "🎤",
-                title = "Transcribe",
-                subtitle = if (state.transcriptionState == TranscriptionState.LISTENING) "Recording..." else "Start",
-                onClick = onTranscribe,
-                isActive = state.transcriptionState == TranscriptionState.LISTENING
+        ActionTile(
+            title = "History",
+            label = "${state.historyCount} saved",
+            onClick = onHistory,
+            modifier = Modifier.weight(1f)
+        )
+        ActionTile(
+            title = "Models",
+            label = state.activeModel?.name ?: "Manage",
+            onClick = onModels,
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
+private fun ActionTile(
+    title: String,
+    label: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    isPrimary: Boolean = false
+) {
+    Box(
+        modifier = modifier
+            .clip(MaterialTheme.shapes.large)
+            .background(if (isPrimary) KurioColors.Primary else KurioColors.Surface)
+            .clickable(onClick = onClick)
+            .padding(KurioSpacing.Xl)
+    ) {
+        Column {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = if (isPrimary) KurioColors.OnPrimary else KurioColors.PrimaryText
             )
-            ActionButton(
-                modifier = Modifier.weight(1f),
-                emoji = "📜",
-                title = "History",
-                subtitle = "${state.historyCount} entries",
-                onClick = onHistory
-            )
-            ActionButton(
-                modifier = Modifier.weight(1f),
-                emoji = "🧠",
-                title = "Models",
-                subtitle = state.activeModel?.name?.take(12) ?: "Download",
-                onClick = onModels
+            Spacer(Modifier.height(KurioSpacing.Xs))
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodySmall,
+                color = if (isPrimary) KurioColors.OnPrimary.copy(alpha = 0.76f) else KurioColors.SecondaryText
             )
         }
     }
 }
 
 @Composable
-private fun ActionButton(
-    modifier: Modifier = Modifier,
-    emoji: String,
-    title: String,
-    subtitle: String,
-    onClick: () -> Unit,
-    isActive: Boolean = false
-) {
-    Column(
-        modifier = modifier
-            .shadow(
-                elevation = if (isActive) 8.dp else 2.dp,
-                shape = RoundedCornerShape(16.dp),
-                spotColor = if (isActive) KurioColors.Accent.copy(alpha = 0.2f)
-                else KurioColors.Accent.copy(alpha = 0.05f)
+private fun StatusGrid(state: HomeUiState) {
+    SectionTitle("System Status")
+    Column(verticalArrangement = Arrangement.spacedBy(KurioSpacing.Md)) {
+        StatusRow("Current Active Model", state.activeModel?.name ?: "Not selected", state.activeModel != null)
+        StatusRow("Accessibility Status", "Ready for text injection", true)
+        StatusRow("Overlay Status", "Available", true)
+        StatusRow("Storage Usage", state.storageUsage.formattedTotal, true)
+    }
+}
+
+@Composable
+private fun StatusRow(label: String, value: String, isHealthy: Boolean) {
+    KurioCard(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            StatusDot(if (isHealthy) KurioColors.Success else KurioColors.Warning)
+            Spacer(Modifier.width(KurioSpacing.Md))
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyMedium,
+                color = KurioColors.SecondaryText,
+                modifier = Modifier.weight(1f)
             )
-            .clip(RoundedCornerShape(16.dp))
-            .background(if (isActive) KurioColors.Accent.copy(alpha = 0.1f) else KurioColors.Surface)
-            .clickable(onClick = onClick)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            Spacer(Modifier.width(KurioSpacing.Md))
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = KurioColors.PrimaryText
+            )
+        }
+    }
+}
+
+@Composable
+private fun StatusPill(text: String, color: androidx.compose.ui.graphics.Color) {
+    Row(
+        modifier = Modifier
+            .clip(MaterialTheme.shapes.medium)
+            .background(color.copy(alpha = 0.12f))
+            .padding(horizontal = KurioSpacing.Md, vertical = KurioSpacing.Sm),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = emoji, fontSize = 28.sp)
-        Spacer(Modifier.height(8.dp))
+        StatusDot(color)
+        Spacer(Modifier.width(KurioSpacing.Sm))
         Text(
-            text = title,
-            fontSize = 13.sp,
+            text = text,
+            style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.SemiBold,
-            color = KurioColors.PrimaryText
-        )
-        Spacer(Modifier.height(2.dp))
-        Text(
-            text = subtitle,
-            fontSize = 10.sp,
-            color = KurioColors.SecondaryText
+            color = color
         )
     }
 }
 
 @Composable
-private fun StorageSection(state: HomeUiState) {
-    KurioStatCard(
-        modifier = Modifier.fillMaxWidth(),
-        label = "STORAGE",
-        value = state.storageUsage.formattedTotal
+private fun StatusDot(color: androidx.compose.ui.graphics.Color) {
+    Box(
+        modifier = Modifier
+            .clip(CircleShape)
+            .background(color)
+            .width(KurioSpacing.Sm)
+            .height(KurioSpacing.Sm)
     )
 }
 
 @Composable
-private fun BottomActionsSection(
-    onSettings: () -> Unit,
-    onAbout: () -> Unit
-) {
-    Row(
+private fun RecentActivitySection(state: HomeUiState) {
+    SectionTitle("Recent Activity")
+    KurioCard(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = if (state.historyCount == 0) {
+                "No recent transcriptions."
+            } else {
+                "${state.historyCount} transcriptions saved locally."
+            },
+            style = MaterialTheme.typography.bodyMedium,
+            color = KurioColors.SecondaryText
+        )
+    }
+
+    SectionTitle("Recent Transcriptions")
+    Button(
+        onClick = {},
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        enabled = false,
+        shape = MaterialTheme.shapes.medium,
+        colors = ButtonDefaults.buttonColors(
+            disabledContainerColor = KurioColors.Surface,
+            disabledContentColor = KurioColors.SecondaryText
+        )
     ) {
-        OutlinedButton(
-            onClick = onSettings,
-            modifier = Modifier.weight(1f),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = KurioColors.Accent),
-            border = androidx.compose.foundation.BorderStroke(1.dp, KurioColors.Border)
-        ) {
-            Text("Settings", fontWeight = FontWeight.Medium)
-        }
-        OutlinedButton(
-            onClick = onAbout,
-            modifier = Modifier.weight(1f),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = KurioColors.Accent),
-            border = androidx.compose.foundation.BorderStroke(1.dp, KurioColors.Border)
-        ) {
-            Text("About", fontWeight = FontWeight.Medium)
-        }
+        Text("Open History to review, copy, share, or delete entries")
     }
 }
 
 @Composable
-private fun UpdateBanner(version: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .background(KurioColors.Accent.copy(alpha = 0.1f))
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = "Update Available",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = KurioColors.Accent
-            )
-            Text(
-                text = "Version $version is ready",
-                fontSize = 12.sp,
-                color = KurioColors.SecondaryText
-            )
-        }
-        Text(
-            text = "View",
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Medium,
-            color = KurioColors.Accent
-        )
-    }
+private fun SectionTitle(title: String) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.labelLarge,
+        fontWeight = FontWeight.SemiBold,
+        color = KurioColors.SecondaryText
+    )
 }
