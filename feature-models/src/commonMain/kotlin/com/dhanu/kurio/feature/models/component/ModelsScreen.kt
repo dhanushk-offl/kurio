@@ -1,7 +1,6 @@
 package com.dhanu.kurio.feature.models.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -40,7 +39,8 @@ fun ModelsScreen(
             val matchesQuery = query.isBlank() ||
                 model.name.contains(query, ignoreCase = true) ||
                 model.language.contains(query, ignoreCase = true) ||
-                model.provider.contains(query, ignoreCase = true)
+                model.provider.contains(query, ignoreCase = true) ||
+                model.engineType.displayName.contains(query, ignoreCase = true)
             val matchesFilter = when (filter) {
                 ModelFilter.All -> true
                 ModelFilter.Recommended -> model.id == RecommendedModelId
@@ -109,6 +109,8 @@ fun ModelsScreen(
                     ModelCard(
                         model = model,
                         progress = state.downloadProgress[model.id] ?: 0f,
+                        downloadSpeed = state.downloadSpeeds[model.id],
+                        extractionProgress = state.extractionProgress[model.id],
                         isActive = model.id == state.activeModelId,
                         onDownload = { onDownload(model.id) },
                         onPause = { onPause(model.id) },
@@ -141,6 +143,8 @@ fun ModelsScreen(
 private fun ModelCard(
     model: SpeechModel,
     progress: Float,
+    downloadSpeed: String?,
+    extractionProgress: Float?,
     isActive: Boolean,
     onDownload: () -> Unit,
     onPause: () -> Unit,
@@ -172,13 +176,15 @@ private fun ModelCard(
                             fontWeight = FontWeight.SemiBold,
                             color = KurioColors.PrimaryText
                         )
+                        Spacer(Modifier.width(8.dp))
+                        BadgeLabel(model.engineType.displayName, KurioColors.Accent)
                         if (model.id == RecommendedModelId) {
-                            Spacer(Modifier.width(8.dp))
-                            BadgeLabel("Recommended")
+                            Spacer(Modifier.width(4.dp))
+                            BadgeLabel("Recommended", KurioColors.Success)
                         }
                         if (model.isExperimental) {
-                            Spacer(Modifier.width(8.dp))
-                            BadgeLabel("Experimental")
+                            Spacer(Modifier.width(4.dp))
+                            BadgeLabel("Experimental", KurioColors.Warning)
                         }
                     }
                     Spacer(Modifier.height(4.dp))
@@ -219,6 +225,7 @@ private fun ModelCard(
                         Text("Download", fontWeight = FontWeight.Medium)
                     }
                 }
+
                 ModelStatus.DOWNLOADING -> {
                     Column {
                         LinearProgressIndicator(
@@ -230,6 +237,14 @@ private fun ModelCard(
                             color = KurioColors.Accent,
                             trackColor = KurioColors.Border.copy(alpha = 0.3f)
                         )
+                        if (downloadSpeed != null) {
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                text = downloadSpeed,
+                                fontSize = 11.sp,
+                                color = KurioColors.SecondaryText
+                            )
+                        }
                         Spacer(Modifier.height(8.dp))
                         Button(
                             onClick = onPause,
@@ -244,6 +259,7 @@ private fun ModelCard(
                         }
                     }
                 }
+
                 ModelStatus.PAUSED -> {
                     Button(
                         onClick = onResume,
@@ -257,29 +273,48 @@ private fun ModelCard(
                         Text("Resume", fontWeight = FontWeight.Medium)
                     }
                 }
-                ModelStatus.DOWNLOADED, ModelStatus.INSTALLED, ModelStatus.IDLE, ModelStatus.WARM -> {
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        OutlinedButton(
-                            onClick = onDelete,
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(12.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(contentColor = KurioColors.Error)
-                        ) {
-                            Text("Delete", fontWeight = FontWeight.Medium)
-                        }
-                        Button(
-                            onClick = onActivate,
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(12.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = KurioColors.Accent,
-                                contentColor = KurioColors.White
+
+                ModelStatus.INSTALLED -> {
+                    if (extractionProgress != null && extractionProgress < 1f) {
+                        Column {
+                            LinearProgressIndicator(
+                                progress = { extractionProgress },
+                                modifier = Modifier.fillMaxWidth().height(6.dp),
+                                color = KurioColors.Accent,
+                                trackColor = KurioColors.Border.copy(alpha = 0.3f)
                             )
-                        ) {
-                            Text("Activate", fontWeight = FontWeight.Medium)
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                text = "Extracting...",
+                                fontSize = 11.sp,
+                                color = KurioColors.SecondaryText
+                            )
+                        }
+                    } else {
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            OutlinedButton(
+                                onClick = onDelete,
+                                modifier = Modifier.weight(1f),
+                                shape = RoundedCornerShape(12.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(contentColor = KurioColors.Error)
+                            ) {
+                                Text("Delete", fontWeight = FontWeight.Medium)
+                            }
+                            Button(
+                                onClick = onActivate,
+                                modifier = Modifier.weight(1f),
+                                shape = RoundedCornerShape(12.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = KurioColors.Accent,
+                                    contentColor = KurioColors.White
+                                )
+                            ) {
+                                Text("Activate", fontWeight = FontWeight.Medium)
+                            }
                         }
                     }
                 }
+
                 ModelStatus.ACTIVE -> {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         OutlinedButton(
@@ -304,6 +339,7 @@ private fun ModelCard(
                         }
                     }
                 }
+
                 ModelStatus.CORRUPTED, ModelStatus.ERROR -> {
                     Button(
                         onClick = onDownload,
@@ -317,6 +353,7 @@ private fun ModelCard(
                         Text("Retry Download", fontWeight = FontWeight.Medium)
                     }
                 }
+
                 ModelStatus.VERIFYING, ModelStatus.LOADING -> {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -330,6 +367,30 @@ private fun ModelCard(
                         )
                         Spacer(Modifier.width(8.dp))
                         Text("Verifying...", fontSize = 13.sp, color = KurioColors.SecondaryText)
+                    }
+                }
+
+                ModelStatus.DOWNLOADED, ModelStatus.IDLE, ModelStatus.WARM -> {
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        OutlinedButton(
+                            onClick = onDelete,
+                            modifier = Modifier.weight(1f),
+                            shape = RoundedCornerShape(12.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(contentColor = KurioColors.Error)
+                        ) {
+                            Text("Delete", fontWeight = FontWeight.Medium)
+                        }
+                        Button(
+                            onClick = onActivate,
+                            modifier = Modifier.weight(1f),
+                            shape = RoundedCornerShape(12.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = KurioColors.Accent,
+                                contentColor = KurioColors.White
+                            )
+                        ) {
+                            Text("Activate", fontWeight = FontWeight.Medium)
+                        }
                     }
                 }
             }
@@ -356,15 +417,15 @@ private fun ModelInfo(label: String, value: String) {
 }
 
 @Composable
-private fun BadgeLabel(text: String) {
+private fun BadgeLabel(text: String, color: androidx.compose.ui.graphics.Color) {
     Text(
         text = text,
         fontSize = 10.sp,
         fontWeight = FontWeight.Bold,
-        color = KurioColors.Accent,
+        color = color,
         modifier = Modifier
             .background(
-                KurioColors.Accent.copy(alpha = 0.12f),
+                color.copy(alpha = 0.12f),
                 RoundedCornerShape(4.dp)
             )
             .padding(horizontal = 6.dp, vertical = 2.dp)

@@ -9,7 +9,7 @@ import com.dhanu.kurio.data.local.dao.ModelDao
 
 @Database(
     entities = [HistoryEntity::class, ModelEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class KurioDatabase : RoomDatabase() {

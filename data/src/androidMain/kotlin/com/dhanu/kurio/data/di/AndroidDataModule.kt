@@ -4,20 +4,28 @@ import android.content.Context
 import com.dhanu.kurio.data.audio.AudioRecorder
 import com.dhanu.kurio.data.audio.AndroidAudioRecorder
 import com.dhanu.kurio.data.createDatabase
+import com.dhanu.kurio.data.engine.EngineFactory
 import com.dhanu.kurio.data.engine.SpeechEngine
-import com.dhanu.kurio.data.engine.WhisperCppEngine
 import com.dhanu.kurio.data.engine.SpeechModelManager
-import com.dhanu.kurio.data.storage.StorageManager
+import com.dhanu.kurio.data.llm.PostProcessor
+import com.dhanu.kurio.data.llm.SimplePostProcessor
 import com.dhanu.kurio.data.remote.api.KurioApi
 import com.dhanu.kurio.data.repository.ModelRepositoryImpl
 import com.dhanu.kurio.data.repository.SettingsRepositoryImpl
+import com.dhanu.kurio.data.repository.TranscriptionRepositoryImpl
+import com.dhanu.kurio.data.storage.StorageManager
+import com.dhanu.kurio.data.vad.SileroVadEngine
+import com.dhanu.kurio.data.vad.SimpleVadEngine
+import com.dhanu.kurio.data.vad.VadEngine
 import com.dhanu.kurio.domain.repository.ModelRepository
 import com.dhanu.kurio.domain.repository.SettingsRepository
+import com.dhanu.kurio.domain.repository.TranscriptionRepository
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
@@ -34,9 +42,9 @@ val androidDataModule = module {
                 })
             }
             install(HttpTimeout) {
-                requestTimeoutMillis = 30_000
-                connectTimeoutMillis = 10_000
-                socketTimeoutMillis = 30_000
+                requestTimeoutMillis = 300_000
+                connectTimeoutMillis = 15_000
+                socketTimeoutMillis = 60_000
             }
         }
     }
@@ -47,10 +55,28 @@ val androidDataModule = module {
     single { get<com.dhanu.kurio.data.local.KurioDatabase>().modelDao() }
 
     single<AudioRecorder> { AndroidAudioRecorder(get()) }
-    single<SpeechEngine> { WhisperCppEngine(get()) }
+    single<SpeechEngine> {
+        EngineFactory.createEngine(
+            com.dhanu.kurio.core.model.EngineType.WHISPER_CPP,
+            get()
+        )
+    }
     single { SpeechModelManager(get(), get(), get(), get()) }
 
-    single<ModelRepository> { ModelRepositoryImpl(get(), get(), get()) }
+    single<VadEngine> {
+        val vad = SileroVadEngine()
+        runBlocking { vad.loadModel(null) }
+        if (vad.isLoaded()) vad else SimpleVadEngine()
+    }
+
+    single<PostProcessor> { SimplePostProcessor() }
+
+    single<ModelRepository> {
+        ModelRepositoryImpl(get(), get(), get()).also { repo ->
+            kotlinx.coroutines.runBlocking { repo.seedDefaultModelsIfEmpty() }
+        }
+    }
     single<SettingsRepository> { SettingsRepositoryImpl(get(), get(), get(), get()) }
+    single<TranscriptionRepository> { TranscriptionRepositoryImpl(get(), get(), get(), get()) }
     single { StorageManager(get(), get(), get(), get()) }
 }

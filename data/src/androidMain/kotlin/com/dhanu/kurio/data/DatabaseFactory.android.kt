@@ -9,5 +9,6 @@ fun createDatabase(context: Context): KurioDatabase {
         context.applicationContext,
         KurioDatabase::class.java,
         "kurio.db"
-    ).build()
+    ).fallbackToDestructiveMigration()
+     .build()
 }

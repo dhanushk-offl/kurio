@@ -18,10 +18,32 @@ data class SpeechModel(
     val checksum: String,
     val version: String,
     val recommendedDeviceClass: DeviceClass,
+    val engineType: EngineType = EngineType.WHISPER_CPP,
+    val modelFormat: ModelFormat = ModelFormat.GGML_BIN,
+    val isDirectory: Boolean = false,
+    val filePath: String? = null,
     val status: ModelStatus = ModelStatus.NOT_INSTALLED,
     val downloadProgress: Float = 0f,
     val isExperimental: Boolean = false
 )
+
+@Serializable
+enum class EngineType(val displayName: String) {
+    WHISPER_CPP("Whisper.cpp"),
+    MOONSHINE("Moonshine"),
+    VOSK("Vosk"),
+    SENSE_VOICE("SenseVoice"),
+    PARAKET("Parakeet"),
+    GIGA_AM("GigaAM")
+}
+
+@Serializable
+enum class ModelFormat(val extension: String) {
+    GGML_BIN("bin"),
+    GGUF("gguf"),
+    ONNX_DIR("onnx"),
+    TAR_GZ("tar.gz")
+}
 
 @Serializable
 enum class ModelStatus {

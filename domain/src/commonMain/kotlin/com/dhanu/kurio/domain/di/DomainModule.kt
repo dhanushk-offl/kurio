@@ -20,6 +20,7 @@ val domainModule = module {
     factory { DeleteModelUseCase(get()) }
     factory { ActivateModelUseCase(get()) }
     factory { GetActiveModelUseCase(get()) }
+    factory { GetModelsByEngineUseCase(get()) }
     factory { ObserveDownloadProgressUseCase(get()) }
 
     factory { ObserveHistoryUseCase(get()) }

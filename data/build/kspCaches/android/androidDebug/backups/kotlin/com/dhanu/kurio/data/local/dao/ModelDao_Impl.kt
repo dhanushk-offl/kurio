@@ -32,7 +32,7 @@ public class ModelDao_Impl(
     this.__db = __db
     this.__insertAdapterOfModelEntity = object : EntityInsertAdapter<ModelEntity>() {
       protected override fun createQuery(): String =
-          "INSERT OR REPLACE INTO `models` (`id`,`name`,`description`,`provider`,`license`,`language`,`sizeBytes`,`ramUsageMb`,`speedRating`,`accuracyRating`,`downloadUrl`,`checksum`,`version`,`recommendedDeviceClass`,`status`,`filePath`,`isExperimental`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+          "INSERT OR REPLACE INTO `models` (`id`,`name`,`description`,`provider`,`license`,`language`,`sizeBytes`,`ramUsageMb`,`speedRating`,`accuracyRating`,`downloadUrl`,`checksum`,`version`,`recommendedDeviceClass`,`engineType`,`modelFormat`,`isDirectory`,`status`,`filePath`,`isExperimental`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
 
       protected override fun bind(statement: SQLiteStatement, entity: ModelEntity) {
         statement.bindText(1, entity.id)
@@ -49,15 +49,19 @@ public class ModelDao_Impl(
         statement.bindText(12, entity.checksum)
         statement.bindText(13, entity.version)
         statement.bindText(14, entity.recommendedDeviceClass)
-        statement.bindText(15, entity.status)
+        statement.bindText(15, entity.engineType)
+        statement.bindText(16, entity.modelFormat)
+        val _tmp: Int = if (entity.isDirectory) 1 else 0
+        statement.bindLong(17, _tmp.toLong())
+        statement.bindText(18, entity.status)
         val _tmpFilePath: String? = entity.filePath
         if (_tmpFilePath == null) {
-          statement.bindNull(16)
+          statement.bindNull(19)
         } else {
-          statement.bindText(16, _tmpFilePath)
+          statement.bindText(19, _tmpFilePath)
         }
-        val _tmp: Int = if (entity.isExperimental) 1 else 0
-        statement.bindLong(17, _tmp.toLong())
+        val _tmp_1: Int = if (entity.isExperimental) 1 else 0
+        statement.bindLong(20, _tmp_1.toLong())
       }
     }
   }
@@ -92,6 +96,9 @@ public class ModelDao_Impl(
         val _columnIndexOfVersion: Int = getColumnIndexOrThrow(_stmt, "version")
         val _columnIndexOfRecommendedDeviceClass: Int = getColumnIndexOrThrow(_stmt,
             "recommendedDeviceClass")
+        val _columnIndexOfEngineType: Int = getColumnIndexOrThrow(_stmt, "engineType")
+        val _columnIndexOfModelFormat: Int = getColumnIndexOrThrow(_stmt, "modelFormat")
+        val _columnIndexOfIsDirectory: Int = getColumnIndexOrThrow(_stmt, "isDirectory")
         val _columnIndexOfStatus: Int = getColumnIndexOrThrow(_stmt, "status")
         val _columnIndexOfFilePath: Int = getColumnIndexOrThrow(_stmt, "filePath")
         val _columnIndexOfIsExperimental: Int = getColumnIndexOrThrow(_stmt, "isExperimental")
@@ -126,6 +133,14 @@ public class ModelDao_Impl(
           _tmpVersion = _stmt.getText(_columnIndexOfVersion)
           val _tmpRecommendedDeviceClass: String
           _tmpRecommendedDeviceClass = _stmt.getText(_columnIndexOfRecommendedDeviceClass)
+          val _tmpEngineType: String
+          _tmpEngineType = _stmt.getText(_columnIndexOfEngineType)
+          val _tmpModelFormat: String
+          _tmpModelFormat = _stmt.getText(_columnIndexOfModelFormat)
+          val _tmpIsDirectory: Boolean
+          val _tmp: Int
+          _tmp = _stmt.getLong(_columnIndexOfIsDirectory).toInt()
+          _tmpIsDirectory = _tmp != 0
           val _tmpStatus: String
           _tmpStatus = _stmt.getText(_columnIndexOfStatus)
           val _tmpFilePath: String?
@@ -135,11 +150,11 @@ public class ModelDao_Impl(
             _tmpFilePath = _stmt.getText(_columnIndexOfFilePath)
           }
           val _tmpIsExperimental: Boolean
-          val _tmp: Int
-          _tmp = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
-          _tmpIsExperimental = _tmp != 0
+          val _tmp_1: Int
+          _tmp_1 = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
+          _tmpIsExperimental = _tmp_1 != 0
           _item =
-              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
+              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpEngineType,_tmpModelFormat,_tmpIsDirectory,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
           _result.add(_item)
         }
         _result
@@ -171,6 +186,9 @@ public class ModelDao_Impl(
         val _columnIndexOfVersion: Int = getColumnIndexOrThrow(_stmt, "version")
         val _columnIndexOfRecommendedDeviceClass: Int = getColumnIndexOrThrow(_stmt,
             "recommendedDeviceClass")
+        val _columnIndexOfEngineType: Int = getColumnIndexOrThrow(_stmt, "engineType")
+        val _columnIndexOfModelFormat: Int = getColumnIndexOrThrow(_stmt, "modelFormat")
+        val _columnIndexOfIsDirectory: Int = getColumnIndexOrThrow(_stmt, "isDirectory")
         val _columnIndexOfStatus: Int = getColumnIndexOrThrow(_stmt, "status")
         val _columnIndexOfFilePath: Int = getColumnIndexOrThrow(_stmt, "filePath")
         val _columnIndexOfIsExperimental: Int = getColumnIndexOrThrow(_stmt, "isExperimental")
@@ -204,6 +222,14 @@ public class ModelDao_Impl(
           _tmpVersion = _stmt.getText(_columnIndexOfVersion)
           val _tmpRecommendedDeviceClass: String
           _tmpRecommendedDeviceClass = _stmt.getText(_columnIndexOfRecommendedDeviceClass)
+          val _tmpEngineType: String
+          _tmpEngineType = _stmt.getText(_columnIndexOfEngineType)
+          val _tmpModelFormat: String
+          _tmpModelFormat = _stmt.getText(_columnIndexOfModelFormat)
+          val _tmpIsDirectory: Boolean
+          val _tmp: Int
+          _tmp = _stmt.getLong(_columnIndexOfIsDirectory).toInt()
+          _tmpIsDirectory = _tmp != 0
           val _tmpStatus: String
           _tmpStatus = _stmt.getText(_columnIndexOfStatus)
           val _tmpFilePath: String?
@@ -213,11 +239,11 @@ public class ModelDao_Impl(
             _tmpFilePath = _stmt.getText(_columnIndexOfFilePath)
           }
           val _tmpIsExperimental: Boolean
-          val _tmp: Int
-          _tmp = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
-          _tmpIsExperimental = _tmp != 0
+          val _tmp_1: Int
+          _tmp_1 = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
+          _tmpIsExperimental = _tmp_1 != 0
           _result =
-              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
+              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpEngineType,_tmpModelFormat,_tmpIsDirectory,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
         } else {
           _result = null
         }
@@ -250,6 +276,9 @@ public class ModelDao_Impl(
         val _columnIndexOfVersion: Int = getColumnIndexOrThrow(_stmt, "version")
         val _columnIndexOfRecommendedDeviceClass: Int = getColumnIndexOrThrow(_stmt,
             "recommendedDeviceClass")
+        val _columnIndexOfEngineType: Int = getColumnIndexOrThrow(_stmt, "engineType")
+        val _columnIndexOfModelFormat: Int = getColumnIndexOrThrow(_stmt, "modelFormat")
+        val _columnIndexOfIsDirectory: Int = getColumnIndexOrThrow(_stmt, "isDirectory")
         val _columnIndexOfStatus: Int = getColumnIndexOrThrow(_stmt, "status")
         val _columnIndexOfFilePath: Int = getColumnIndexOrThrow(_stmt, "filePath")
         val _columnIndexOfIsExperimental: Int = getColumnIndexOrThrow(_stmt, "isExperimental")
@@ -283,6 +312,14 @@ public class ModelDao_Impl(
           _tmpVersion = _stmt.getText(_columnIndexOfVersion)
           val _tmpRecommendedDeviceClass: String
           _tmpRecommendedDeviceClass = _stmt.getText(_columnIndexOfRecommendedDeviceClass)
+          val _tmpEngineType: String
+          _tmpEngineType = _stmt.getText(_columnIndexOfEngineType)
+          val _tmpModelFormat: String
+          _tmpModelFormat = _stmt.getText(_columnIndexOfModelFormat)
+          val _tmpIsDirectory: Boolean
+          val _tmp: Int
+          _tmp = _stmt.getLong(_columnIndexOfIsDirectory).toInt()
+          _tmpIsDirectory = _tmp != 0
           val _tmpStatus: String
           _tmpStatus = _stmt.getText(_columnIndexOfStatus)
           val _tmpFilePath: String?
@@ -292,11 +329,11 @@ public class ModelDao_Impl(
             _tmpFilePath = _stmt.getText(_columnIndexOfFilePath)
           }
           val _tmpIsExperimental: Boolean
-          val _tmp: Int
-          _tmp = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
-          _tmpIsExperimental = _tmp != 0
+          val _tmp_1: Int
+          _tmp_1 = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
+          _tmpIsExperimental = _tmp_1 != 0
           _result =
-              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
+              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpEngineType,_tmpModelFormat,_tmpIsDirectory,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
         } else {
           _result = null
         }
@@ -327,6 +364,9 @@ public class ModelDao_Impl(
         val _columnIndexOfVersion: Int = getColumnIndexOrThrow(_stmt, "version")
         val _columnIndexOfRecommendedDeviceClass: Int = getColumnIndexOrThrow(_stmt,
             "recommendedDeviceClass")
+        val _columnIndexOfEngineType: Int = getColumnIndexOrThrow(_stmt, "engineType")
+        val _columnIndexOfModelFormat: Int = getColumnIndexOrThrow(_stmt, "modelFormat")
+        val _columnIndexOfIsDirectory: Int = getColumnIndexOrThrow(_stmt, "isDirectory")
         val _columnIndexOfStatus: Int = getColumnIndexOrThrow(_stmt, "status")
         val _columnIndexOfFilePath: Int = getColumnIndexOrThrow(_stmt, "filePath")
         val _columnIndexOfIsExperimental: Int = getColumnIndexOrThrow(_stmt, "isExperimental")
@@ -361,6 +401,14 @@ public class ModelDao_Impl(
           _tmpVersion = _stmt.getText(_columnIndexOfVersion)
           val _tmpRecommendedDeviceClass: String
           _tmpRecommendedDeviceClass = _stmt.getText(_columnIndexOfRecommendedDeviceClass)
+          val _tmpEngineType: String
+          _tmpEngineType = _stmt.getText(_columnIndexOfEngineType)
+          val _tmpModelFormat: String
+          _tmpModelFormat = _stmt.getText(_columnIndexOfModelFormat)
+          val _tmpIsDirectory: Boolean
+          val _tmp: Int
+          _tmp = _stmt.getLong(_columnIndexOfIsDirectory).toInt()
+          _tmpIsDirectory = _tmp != 0
           val _tmpStatus: String
           _tmpStatus = _stmt.getText(_columnIndexOfStatus)
           val _tmpFilePath: String?
@@ -370,11 +418,101 @@ public class ModelDao_Impl(
             _tmpFilePath = _stmt.getText(_columnIndexOfFilePath)
           }
           val _tmpIsExperimental: Boolean
-          val _tmp: Int
-          _tmp = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
-          _tmpIsExperimental = _tmp != 0
+          val _tmp_1: Int
+          _tmp_1 = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
+          _tmpIsExperimental = _tmp_1 != 0
           _item =
-              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
+              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpEngineType,_tmpModelFormat,_tmpIsDirectory,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
+          _result.add(_item)
+        }
+        _result
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
+  public override suspend fun getByEngineType(engineType: String): List<ModelEntity> {
+    val _sql: String = "SELECT * FROM models WHERE engineType = ?"
+    return performSuspending(__db, true, false) { _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        var _argIndex: Int = 1
+        _stmt.bindText(_argIndex, engineType)
+        val _columnIndexOfId: Int = getColumnIndexOrThrow(_stmt, "id")
+        val _columnIndexOfName: Int = getColumnIndexOrThrow(_stmt, "name")
+        val _columnIndexOfDescription: Int = getColumnIndexOrThrow(_stmt, "description")
+        val _columnIndexOfProvider: Int = getColumnIndexOrThrow(_stmt, "provider")
+        val _columnIndexOfLicense: Int = getColumnIndexOrThrow(_stmt, "license")
+        val _columnIndexOfLanguage: Int = getColumnIndexOrThrow(_stmt, "language")
+        val _columnIndexOfSizeBytes: Int = getColumnIndexOrThrow(_stmt, "sizeBytes")
+        val _columnIndexOfRamUsageMb: Int = getColumnIndexOrThrow(_stmt, "ramUsageMb")
+        val _columnIndexOfSpeedRating: Int = getColumnIndexOrThrow(_stmt, "speedRating")
+        val _columnIndexOfAccuracyRating: Int = getColumnIndexOrThrow(_stmt, "accuracyRating")
+        val _columnIndexOfDownloadUrl: Int = getColumnIndexOrThrow(_stmt, "downloadUrl")
+        val _columnIndexOfChecksum: Int = getColumnIndexOrThrow(_stmt, "checksum")
+        val _columnIndexOfVersion: Int = getColumnIndexOrThrow(_stmt, "version")
+        val _columnIndexOfRecommendedDeviceClass: Int = getColumnIndexOrThrow(_stmt,
+            "recommendedDeviceClass")
+        val _columnIndexOfEngineType: Int = getColumnIndexOrThrow(_stmt, "engineType")
+        val _columnIndexOfModelFormat: Int = getColumnIndexOrThrow(_stmt, "modelFormat")
+        val _columnIndexOfIsDirectory: Int = getColumnIndexOrThrow(_stmt, "isDirectory")
+        val _columnIndexOfStatus: Int = getColumnIndexOrThrow(_stmt, "status")
+        val _columnIndexOfFilePath: Int = getColumnIndexOrThrow(_stmt, "filePath")
+        val _columnIndexOfIsExperimental: Int = getColumnIndexOrThrow(_stmt, "isExperimental")
+        val _result: MutableList<ModelEntity> = mutableListOf()
+        while (_stmt.step()) {
+          val _item: ModelEntity
+          val _tmpId: String
+          _tmpId = _stmt.getText(_columnIndexOfId)
+          val _tmpName: String
+          _tmpName = _stmt.getText(_columnIndexOfName)
+          val _tmpDescription: String
+          _tmpDescription = _stmt.getText(_columnIndexOfDescription)
+          val _tmpProvider: String
+          _tmpProvider = _stmt.getText(_columnIndexOfProvider)
+          val _tmpLicense: String
+          _tmpLicense = _stmt.getText(_columnIndexOfLicense)
+          val _tmpLanguage: String
+          _tmpLanguage = _stmt.getText(_columnIndexOfLanguage)
+          val _tmpSizeBytes: Long
+          _tmpSizeBytes = _stmt.getLong(_columnIndexOfSizeBytes)
+          val _tmpRamUsageMb: Int
+          _tmpRamUsageMb = _stmt.getLong(_columnIndexOfRamUsageMb).toInt()
+          val _tmpSpeedRating: Int
+          _tmpSpeedRating = _stmt.getLong(_columnIndexOfSpeedRating).toInt()
+          val _tmpAccuracyRating: Int
+          _tmpAccuracyRating = _stmt.getLong(_columnIndexOfAccuracyRating).toInt()
+          val _tmpDownloadUrl: String
+          _tmpDownloadUrl = _stmt.getText(_columnIndexOfDownloadUrl)
+          val _tmpChecksum: String
+          _tmpChecksum = _stmt.getText(_columnIndexOfChecksum)
+          val _tmpVersion: String
+          _tmpVersion = _stmt.getText(_columnIndexOfVersion)
+          val _tmpRecommendedDeviceClass: String
+          _tmpRecommendedDeviceClass = _stmt.getText(_columnIndexOfRecommendedDeviceClass)
+          val _tmpEngineType: String
+          _tmpEngineType = _stmt.getText(_columnIndexOfEngineType)
+          val _tmpModelFormat: String
+          _tmpModelFormat = _stmt.getText(_columnIndexOfModelFormat)
+          val _tmpIsDirectory: Boolean
+          val _tmp: Int
+          _tmp = _stmt.getLong(_columnIndexOfIsDirectory).toInt()
+          _tmpIsDirectory = _tmp != 0
+          val _tmpStatus: String
+          _tmpStatus = _stmt.getText(_columnIndexOfStatus)
+          val _tmpFilePath: String?
+          if (_stmt.isNull(_columnIndexOfFilePath)) {
+            _tmpFilePath = null
+          } else {
+            _tmpFilePath = _stmt.getText(_columnIndexOfFilePath)
+          }
+          val _tmpIsExperimental: Boolean
+          val _tmp_1: Int
+          _tmp_1 = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
+          _tmpIsExperimental = _tmp_1 != 0
+          _item =
+              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpEngineType,_tmpModelFormat,_tmpIsDirectory,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
           _result.add(_item)
         }
         _result
@@ -404,6 +542,9 @@ public class ModelDao_Impl(
         val _columnIndexOfVersion: Int = getColumnIndexOrThrow(_stmt, "version")
         val _columnIndexOfRecommendedDeviceClass: Int = getColumnIndexOrThrow(_stmt,
             "recommendedDeviceClass")
+        val _columnIndexOfEngineType: Int = getColumnIndexOrThrow(_stmt, "engineType")
+        val _columnIndexOfModelFormat: Int = getColumnIndexOrThrow(_stmt, "modelFormat")
+        val _columnIndexOfIsDirectory: Int = getColumnIndexOrThrow(_stmt, "isDirectory")
         val _columnIndexOfStatus: Int = getColumnIndexOrThrow(_stmt, "status")
         val _columnIndexOfFilePath: Int = getColumnIndexOrThrow(_stmt, "filePath")
         val _columnIndexOfIsExperimental: Int = getColumnIndexOrThrow(_stmt, "isExperimental")
@@ -437,6 +578,14 @@ public class ModelDao_Impl(
           _tmpVersion = _stmt.getText(_columnIndexOfVersion)
           val _tmpRecommendedDeviceClass: String
           _tmpRecommendedDeviceClass = _stmt.getText(_columnIndexOfRecommendedDeviceClass)
+          val _tmpEngineType: String
+          _tmpEngineType = _stmt.getText(_columnIndexOfEngineType)
+          val _tmpModelFormat: String
+          _tmpModelFormat = _stmt.getText(_columnIndexOfModelFormat)
+          val _tmpIsDirectory: Boolean
+          val _tmp: Int
+          _tmp = _stmt.getLong(_columnIndexOfIsDirectory).toInt()
+          _tmpIsDirectory = _tmp != 0
           val _tmpStatus: String
           _tmpStatus = _stmt.getText(_columnIndexOfStatus)
           val _tmpFilePath: String?
@@ -446,11 +595,11 @@ public class ModelDao_Impl(
             _tmpFilePath = _stmt.getText(_columnIndexOfFilePath)
           }
           val _tmpIsExperimental: Boolean
-          val _tmp: Int
-          _tmp = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
-          _tmpIsExperimental = _tmp != 0
+          val _tmp_1: Int
+          _tmp_1 = _stmt.getLong(_columnIndexOfIsExperimental).toInt()
+          _tmpIsExperimental = _tmp_1 != 0
           _result =
-              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
+              ModelEntity(_tmpId,_tmpName,_tmpDescription,_tmpProvider,_tmpLicense,_tmpLanguage,_tmpSizeBytes,_tmpRamUsageMb,_tmpSpeedRating,_tmpAccuracyRating,_tmpDownloadUrl,_tmpChecksum,_tmpVersion,_tmpRecommendedDeviceClass,_tmpEngineType,_tmpModelFormat,_tmpIsDirectory,_tmpStatus,_tmpFilePath,_tmpIsExperimental)
         } else {
           _result = null
         }
@@ -503,6 +652,33 @@ public class ModelDao_Impl(
           _stmt.bindText(_argIndex, filePath)
         }
         _argIndex = 2
+        _stmt.bindText(_argIndex, modelId)
+        _stmt.step()
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
+  public override suspend fun updateFilePathWithType(
+    modelId: String,
+    filePath: String?,
+    isDirectory: Boolean,
+  ) {
+    val _sql: String = "UPDATE models SET filePath = ?, isDirectory = ? WHERE id = ?"
+    return performSuspending(__db, false, true) { _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        var _argIndex: Int = 1
+        if (filePath == null) {
+          _stmt.bindNull(_argIndex)
+        } else {
+          _stmt.bindText(_argIndex, filePath)
+        }
+        _argIndex = 2
+        val _tmp: Int = if (isDirectory) 1 else 0
+        _stmt.bindLong(_argIndex, _tmp.toLong())
+        _argIndex = 3
         _stmt.bindText(_argIndex, modelId)
         _stmt.step()
       } finally {

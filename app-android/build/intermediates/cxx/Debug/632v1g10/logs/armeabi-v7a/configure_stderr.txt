@@ -1,0 +1,11 @@
+CMake Error at CMakeLists.txt:37 (add_library):
+  Cannot find source file:
+
+    /home/dhanush/kurio/app-android/.cxx/Debug/632v1g10/armeabi-v7a/whisper.cpp-1.7.4/ggml.c
+
+
+CMake Error at CMakeLists.txt:37 (add_library):
+  No SOURCES given to target: whisper
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml:2:13-83
-INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml:2:13-83
+ADDED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml:2:13-83
+INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml:2:13-83
 	package
-		INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml
+		INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml
 	xmlns:android
-		ADDED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml:2:23-81
+		ADDED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml:2:23-81
 uses-sdk
-INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml reason: use-sdk injection requested
-INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml
-INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml
+INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml reason: use-sdk injection requested
+INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml
+INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml
 	android:targetSdkVersion
-		INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml
+		INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml
 	android:minSdkVersion
-		INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10345199073630666105.xml
+		INJECTED from /home/dhanush/kurio/feature-transcription/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18123792552424314930.xml

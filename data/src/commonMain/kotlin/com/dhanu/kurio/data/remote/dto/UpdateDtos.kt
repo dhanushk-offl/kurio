@@ -45,7 +45,13 @@ data class ModelDefinitionDto(
     @SerialName("device_class")
     val recommendedDeviceClass: String,
     @SerialName("is_experimental")
-    val isExperimental: Boolean = false
+    val isExperimental: Boolean = false,
+    @SerialName("engine_type")
+    val engineType: String = "WHISPER_CPP",
+    @SerialName("model_format")
+    val modelFormat: String = "GGML_BIN",
+    @SerialName("is_directory")
+    val isDirectory: Boolean = false
 )
 
 @Serializable

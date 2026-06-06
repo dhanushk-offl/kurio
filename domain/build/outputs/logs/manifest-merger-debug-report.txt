@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml:2:13-83
-INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml:2:13-83
+ADDED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml:2:13-83
+INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml:2:13-83
 	package
-		INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml
+		INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml
 	xmlns:android
-		ADDED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml:2:23-81
+		ADDED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml:2:23-81
 uses-sdk
-INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml reason: use-sdk injection requested
-INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml
-INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml
+INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml reason: use-sdk injection requested
+INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml
+INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml
 	android:targetSdkVersion
-		INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml
+		INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml
 	android:minSdkVersion
-		INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest11340647058929668101.xml
+		INJECTED from /home/dhanush/kurio/domain/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest680260115998070874.xml

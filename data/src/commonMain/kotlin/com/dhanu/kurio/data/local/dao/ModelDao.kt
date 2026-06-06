@@ -21,6 +21,9 @@ interface ModelDao {
     @Query("SELECT * FROM models")
     suspend fun getAll(): List<ModelEntity>
 
+    @Query("SELECT * FROM models WHERE engineType = :engineType")
+    suspend fun getByEngineType(engineType: String): List<ModelEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: ModelEntity)
 
@@ -35,6 +38,9 @@ interface ModelDao {
 
     @Query("UPDATE models SET filePath = :filePath WHERE id = :modelId")
     suspend fun updateFilePath(modelId: String, filePath: String?)
+
+    @Query("UPDATE models SET filePath = :filePath, isDirectory = :isDirectory WHERE id = :modelId")
+    suspend fun updateFilePathWithType(modelId: String, filePath: String?, isDirectory: Boolean)
 
     @Query("SELECT * FROM models WHERE status = 'ACTIVE' LIMIT 1")
     suspend fun getActive(): ModelEntity?

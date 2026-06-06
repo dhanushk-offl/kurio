@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey
 import com.dhanu.kurio.core.model.SpeechModel
 import com.dhanu.kurio.core.model.DeviceClass
 import com.dhanu.kurio.core.model.ModelStatus
+import com.dhanu.kurio.core.model.EngineType
+import com.dhanu.kurio.core.model.ModelFormat
 
 @Entity(tableName = "models")
 data class ModelEntity(
@@ -23,6 +25,9 @@ data class ModelEntity(
     val checksum: String,
     val version: String,
     val recommendedDeviceClass: String,
+    val engineType: String = EngineType.WHISPER_CPP.name,
+    val modelFormat: String = ModelFormat.GGML_BIN.name,
+    val isDirectory: Boolean = false,
     val status: String,
     val filePath: String?,
     val isExperimental: Boolean
@@ -42,6 +47,10 @@ data class ModelEntity(
         checksum = checksum,
         version = version,
         recommendedDeviceClass = DeviceClass.valueOf(recommendedDeviceClass),
+        engineType = try { EngineType.valueOf(engineType) } catch (_: Exception) { EngineType.WHISPER_CPP },
+        modelFormat = try { ModelFormat.valueOf(modelFormat) } catch (_: Exception) { ModelFormat.GGML_BIN },
+        isDirectory = isDirectory,
+        filePath = filePath,
         status = ModelStatus.fromPersisted(status),
         isExperimental = isExperimental
     )
@@ -62,6 +71,9 @@ data class ModelEntity(
             checksum = model.checksum,
             version = model.version,
             recommendedDeviceClass = model.recommendedDeviceClass.name,
+            engineType = model.engineType.name,
+            modelFormat = model.modelFormat.name,
+            isDirectory = model.isDirectory,
             status = model.status.name,
             filePath = filePath,
             isExperimental = model.isExperimental

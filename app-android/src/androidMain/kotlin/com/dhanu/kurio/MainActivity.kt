@@ -1,9 +1,16 @@
 package com.dhanu.kurio
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,9 +30,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.launch
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -44,6 +55,7 @@ import com.dhanu.kurio.feature.settings.component.SettingsScreen
 import com.dhanu.kurio.feature.settings.viewmodel.SettingsViewModel
 import com.dhanu.kurio.feature.transcription.component.TranscriptionScreen
 import com.dhanu.kurio.feature.transcription.viewmodel.TranscriptionViewModel
+import com.dhanu.kurio.domain.repository.SettingsRepository
 import com.dhanu.kurio.presentation.component.card.KurioCard
 import com.dhanu.kurio.presentation.component.overlay.OnboardingScreen
 import com.dhanu.kurio.presentation.component.screen.KurioScreen
@@ -65,7 +77,18 @@ class MainActivity : ComponentActivity() {
                     if (showSplash) {
                         AnimatedSplashScreen(onSplashComplete = { showSplash = false })
                     } else {
-                        KurioApp()
+                        val settingsRepo: SettingsRepository = koinInject()
+                        var isOnboardingCompleted by remember { mutableStateOf<Boolean?>(null) }
+                        LaunchedEffect(Unit) {
+                            isOnboardingCompleted = settingsRepo.isOnboardingCompleted()
+                        }
+                        isOnboardingCompleted?.let { completed ->
+                            val scope = rememberCoroutineScope()
+                            KurioApp(
+                                isOnboardingCompleted = completed,
+                                onOnboardingComplete = { scope.launch { settingsRepo.setOnboardingCompleted(true) } }
+                            )
+                        }
                     }
                 }
             }
@@ -76,7 +99,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun KurioApp(
     navController: NavHostController = rememberNavController(),
-    isOnboardingCompleted: Boolean = true
+    isOnboardingCompleted: Boolean = true,
+    onOnboardingComplete: () -> Unit = {}
 ) {
     val startRoute = if (isOnboardingCompleted) Screen.Home.route else Screen.Onboarding.route
 
@@ -85,10 +109,38 @@ fun KurioApp(
         startDestination = startRoute
     ) {
         composable(Screen.Onboarding.route) {
+            val context = LocalContext.current
+            val micLauncher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.RequestPermission()
+            ) { }
+            val overlayLauncher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.StartActivityForResult()
+            ) { }
+
             OnboardingScreen(
                 onComplete = {
+                    onOnboardingComplete()
                     navController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Onboarding.route) { inclusive = true }
+                    }
+                },
+                onRequestMicrophonePermission = {
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO)
+                        != android.content.pm.PackageManager.PERMISSION_GRANTED
+                    ) {
+                        micLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                    }
+                },
+                onRequestOverlayPermission = {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && !Settings.canDrawOverlays(context)
+                    ) {
+                        overlayLauncher.launch(
+                            Intent(
+                                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                Uri.parse("package:${context.packageName}")
+                            )
+                        )
                     }
                 }
             )
@@ -113,10 +165,24 @@ fun KurioApp(
             val viewModel: TranscriptionViewModel = koinInject()
             LaunchedEffect(Unit) { viewModel.initialize() }
             val state by viewModel.uiState.collectAsState()
+            val context = LocalContext.current
+            val micLauncher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.RequestPermission()
+            ) { isGranted ->
+                if (isGranted) viewModel.onStartRecording()
+            }
 
             TranscriptionScreen(
                 state = state,
-                onStartRecording = { viewModel.onStartRecording() },
+                onStartRecording = {
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO)
+                        == android.content.pm.PackageManager.PERMISSION_GRANTED
+                    ) {
+                        viewModel.onStartRecording()
+                    } else {
+                        micLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                    }
+                },
                 onStopRecording = { viewModel.onStopRecording() },
                 onCancel = { viewModel.onCancel() },
                 onBack = { navController.popBackStack() },

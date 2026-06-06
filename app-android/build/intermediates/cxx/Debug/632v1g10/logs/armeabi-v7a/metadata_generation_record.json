@@ -1,0 +1,119 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 26 min SDK version: armeabi-v7a",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "rebuilding JSON /home/dhanush/kurio/app-android/.cxx/Debug/632v1g10/armeabi-v7a/android_gradle_build.json due to:",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "- no fingerprint file, will remove stale configuration folder",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "removing stale contents from \u0027/home/dhanush/kurio/app-android/.cxx/Debug/632v1g10/armeabi-v7a\u0027",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "created folder \u0027/home/dhanush/kurio/app-android/.cxx/Debug/632v1g10/armeabi-v7a\u0027",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "executing cmake /opt/android-sdk/cmake/3.22.1/bin/cmake \\\n  -H/home/dhanush/kurio/app-android/src/main/jni \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d26 \\\n  -DANDROID_PLATFORM\u003dandroid-26 \\\n  -DANDROID_ABI\u003darmeabi-v7a \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a \\\n  -DANDROID_NDK\u003d/opt/android-sdk/ndk/27.0.12077973 \\\n  -DCMAKE_ANDROID_NDK\u003d/opt/android-sdk/ndk/27.0.12077973 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/opt/android-sdk/ndk/27.0.12077973/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/opt/android-sdk/cmake/3.22.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/home/dhanush/kurio/app-android/build/intermediates/cxx/Debug/632v1g10/obj/armeabi-v7a \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/home/dhanush/kurio/app-android/build/intermediates/cxx/Debug/632v1g10/obj/armeabi-v7a \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/home/dhanush/kurio/app-android/.cxx/Debug/632v1g10/armeabi-v7a \\\n  -GNinja\n",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "/opt/android-sdk/cmake/3.22.1/bin/cmake \\\n  -H/home/dhanush/kurio/app-android/src/main/jni \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d26 \\\n  -DANDROID_PLATFORM\u003dandroid-26 \\\n  -DANDROID_ABI\u003darmeabi-v7a \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a \\\n  -DANDROID_NDK\u003d/opt/android-sdk/ndk/27.0.12077973 \\\n  -DCMAKE_ANDROID_NDK\u003d/opt/android-sdk/ndk/27.0.12077973 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/opt/android-sdk/ndk/27.0.12077973/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/opt/android-sdk/cmake/3.22.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/home/dhanush/kurio/app-android/build/intermediates/cxx/Debug/632v1g10/obj/armeabi-v7a \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/home/dhanush/kurio/app-android/build/intermediates/cxx/Debug/632v1g10/obj/armeabi-v7a \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/home/dhanush/kurio/app-android/.cxx/Debug/632v1g10/armeabi-v7a \\\n  -GNinja\n",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "Received process result: 1",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed with problem. Exception: com.android.ide.common.process.ProcessException: -- The C compiler identification is Clang 18.0.1\n-- The CXX compiler identification is Clang 18.0.1\n-- Detecting C compiler ABI info\n-- Detecting C compiler ABI info - done\n-- Check for working C compiler: /opt/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /opt/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Downloading whisper.cpp v1.7.4...\n-- whisper.cpp downloaded successfully\n-- Whisper.cpp build configured for ABI: armeabi-v7a\n-- Configuring done\n\nC++ build system [configure] failed while executing:\n    /opt/android-sdk/cmake/3.22.1/bin/cmake \\\n      -H/home/dhanush/kurio/app-android/src/main/jni \\\n      -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n      -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n      -DCMAKE_SYSTEM_VERSION\u003d26 \\\n      -DANDROID_PLATFORM\u003dandroid-26 \\\n      -DANDROID_ABI\u003darmeabi-v7a \\\n      -DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a \\\n      -DANDROID_NDK\u003d/opt/android-sdk/ndk/27.0.12077973 \\\n      -DCMAKE_ANDROID_NDK\u003d/opt/android-sdk/ndk/27.0.12077973 \\\n      -DCMAKE_TOOLCHAIN_FILE\u003d/opt/android-sdk/ndk/27.0.12077973/build/cmake/android.toolchain.cmake \\\n      -DCMAKE_MAKE_PROGRAM\u003d/opt/android-sdk/cmake/3.22.1/bin/ninja \\\n      -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/home/dhanush/kurio/app-android/build/intermediates/cxx/Debug/632v1g10/obj/armeabi-v7a \\\n      -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/home/dhanush/kurio/app-android/build/intermediates/cxx/Debug/632v1g10/obj/armeabi-v7a \\\n      -DCMAKE_BUILD_TYPE\u003dDebug \\\n      -B/home/dhanush/kurio/app-android/.cxx/Debug/632v1g10/armeabi-v7a \\\n      -GNinja\n  from /home/dhanush/kurio/app-android\nCMake Error at CMakeLists.txt:37 (add_library):\n  Cannot find source file:\n\n    /home/dhanush/kurio/app-android/.cxx/Debug/632v1g10/armeabi-v7a/whisper.cpp-1.7.4/ggml.c\n\n\nCMake Error at CMakeLists.txt:37 (add_library):\n  No SOURCES given to target: whisper\n\n\nCMake Generate step failed.  Build files cannot be regenerated correctly.",
+    "file_": "/home/dhanush/kurio/app-android/src/main/jni/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  }
+]

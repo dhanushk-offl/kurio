@@ -21,6 +21,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.datastore.preferences)
+            implementation(libs.onnx.runtime)
             implementation("androidx.core:core-ktx:1.15.0")
         }
         iosMain.dependencies {

@@ -40,13 +40,13 @@ public class KurioDatabase_Impl : KurioDatabase() {
   }
 
   protected override fun createOpenDelegate(): RoomOpenDelegate {
-    val _openDelegate: RoomOpenDelegate = object : RoomOpenDelegate(1,
-        "01fefac51eb1c76d8926f299d436d950", "566e335cbcaf486c27d34fc2767587d6") {
+    val _openDelegate: RoomOpenDelegate = object : RoomOpenDelegate(2,
+        "4487232c2c1f60cfaf07c33c04e49e60", "f8e051969be7370a5054e3202cbba2cd") {
       public override fun createAllTables(connection: SQLiteConnection) {
         connection.execSQL("CREATE TABLE IF NOT EXISTS `history` (`id` TEXT NOT NULL, `text` TEXT NOT NULL, `dateMillis` INTEGER NOT NULL, `durationMs` INTEGER NOT NULL, `wordCount` INTEGER NOT NULL, `characterCount` INTEGER NOT NULL, `modelId` TEXT NOT NULL, `language` TEXT NOT NULL, PRIMARY KEY(`id`))")
-        connection.execSQL("CREATE TABLE IF NOT EXISTS `models` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `provider` TEXT NOT NULL, `license` TEXT NOT NULL, `language` TEXT NOT NULL, `sizeBytes` INTEGER NOT NULL, `ramUsageMb` INTEGER NOT NULL, `speedRating` INTEGER NOT NULL, `accuracyRating` INTEGER NOT NULL, `downloadUrl` TEXT NOT NULL, `checksum` TEXT NOT NULL, `version` TEXT NOT NULL, `recommendedDeviceClass` TEXT NOT NULL, `status` TEXT NOT NULL, `filePath` TEXT, `isExperimental` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+        connection.execSQL("CREATE TABLE IF NOT EXISTS `models` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `provider` TEXT NOT NULL, `license` TEXT NOT NULL, `language` TEXT NOT NULL, `sizeBytes` INTEGER NOT NULL, `ramUsageMb` INTEGER NOT NULL, `speedRating` INTEGER NOT NULL, `accuracyRating` INTEGER NOT NULL, `downloadUrl` TEXT NOT NULL, `checksum` TEXT NOT NULL, `version` TEXT NOT NULL, `recommendedDeviceClass` TEXT NOT NULL, `engineType` TEXT NOT NULL, `modelFormat` TEXT NOT NULL, `isDirectory` INTEGER NOT NULL, `status` TEXT NOT NULL, `filePath` TEXT, `isExperimental` INTEGER NOT NULL, PRIMARY KEY(`id`))")
         connection.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)")
-        connection.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '01fefac51eb1c76d8926f299d436d950')")
+        connection.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4487232c2c1f60cfaf07c33c04e49e60')")
       }
 
       public override fun dropAllTables(connection: SQLiteConnection) {
@@ -130,6 +130,12 @@ public class KurioDatabase_Impl : KurioDatabase() {
             TableInfo.CREATED_FROM_ENTITY))
         _columnsModels.put("recommendedDeviceClass", TableInfo.Column("recommendedDeviceClass",
             "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
+        _columnsModels.put("engineType", TableInfo.Column("engineType", "TEXT", true, 0, null,
+            TableInfo.CREATED_FROM_ENTITY))
+        _columnsModels.put("modelFormat", TableInfo.Column("modelFormat", "TEXT", true, 0, null,
+            TableInfo.CREATED_FROM_ENTITY))
+        _columnsModels.put("isDirectory", TableInfo.Column("isDirectory", "INTEGER", true, 0, null,
+            TableInfo.CREATED_FROM_ENTITY))
         _columnsModels.put("status", TableInfo.Column("status", "TEXT", true, 0, null,
             TableInfo.CREATED_FROM_ENTITY))
         _columnsModels.put("filePath", TableInfo.Column("filePath", "TEXT", false, 0, null,

@@ -6,7 +6,10 @@ import kotlinx.serialization.Serializable
 enum class TranscriptionState {
     IDLE,
     LISTENING,
+    VAD_DETECTING,
+    VAD_SPEECH,
     PROCESSING,
+    POST_PROCESSING,
     COMPLETED,
     ERROR
 }
@@ -20,7 +23,9 @@ data class TranscriptionResult(
     val wordCount: Int,
     val characterCount: Int,
     val modelId: String,
-    val language: String = "en"
+    val language: String = "en",
+    val vadProcessed: Boolean = false,
+    val postProcessed: Boolean = false
 )
 
 @Serializable
@@ -46,5 +51,6 @@ enum class TranscriptionErrorCode {
     MODEL_CORRUPTED,
     DOWNLOAD_FAILED,
     NETWORK_FAILURE,
+    VAD_FAILURE,
     UNKNOWN
 }

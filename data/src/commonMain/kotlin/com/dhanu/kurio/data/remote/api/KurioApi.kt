@@ -6,7 +6,9 @@ import com.dhanu.kurio.data.remote.dto.AnnouncementResponse
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.utils.io.*
 
 open class KurioApi(
     private val client: HttpClient
@@ -47,5 +49,27 @@ open class KurioApi(
 
     suspend fun downloadModel(url: String): ByteArray {
         return client.get(url).body()
+    }
+
+    data class StreamResult(
+        val channel: ByteReadChannel,
+        val contentLength: Long?,
+        val statusCode: Int
+    )
+
+    suspend fun downloadModelStreaming(
+        url: String,
+        rangeStart: Long? = null
+    ): StreamResult {
+        val response = client.get(url) {
+            if (rangeStart != null && rangeStart > 0) {
+                header(HttpHeaders.Range, "bytes=$rangeStart-")
+            }
+        }
+        return StreamResult(
+            channel = response.bodyAsChannel(),
+            contentLength = response.contentLength(),
+            statusCode = response.status.value
+        )
     }
 }

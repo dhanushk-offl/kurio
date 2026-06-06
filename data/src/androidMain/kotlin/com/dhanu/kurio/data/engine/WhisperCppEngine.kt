@@ -6,6 +6,7 @@ import com.dhanu.kurio.core.util.IdGenerator
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class WhisperCppEngine(
     private val context: Context
@@ -21,8 +22,9 @@ class WhisperCppEngine(
             try {
                 System.loadLibrary("whisper")
                 nativeLoaded = true
+                Napier.d(tag = "WhisperEngine") { "Native whisper library loaded successfully" }
             } catch (e: UnsatisfiedLinkError) {
-                Napier.e(tag = "WhisperEngine") { "Native whisper library not available" }
+                Napier.e(tag = "WhisperEngine") { "Native whisper library not available: ${e.message}" }
             }
         }
     }
@@ -44,7 +46,7 @@ class WhisperCppEngine(
                 val text = if (nativeLoaded) {
                     nativeTranscribe(audioData)
                 } else {
-                    Napier.w(tag = "WhisperEngine") { "Native lib not loaded, returning mock" }
+                    Napier.w(tag = "WhisperEngine") { "Native lib not loaded, returning simulated result" }
                     simulateTranscription(audioData)
                 }
 
@@ -59,10 +61,10 @@ class WhisperCppEngine(
                     durationMs = duration,
                     wordCount = text.split("\\s+".toRegex()).size,
                     characterCount = text.length,
-                    modelId = currentModelPath?.substringAfterLast("/")?.substringBefore(".bin") ?: "unknown"
+                    modelId = currentModelPath?.substringAfterLast("/")?.substringBefore(".") ?: "unknown"
                 )
             } catch (e: Exception) {
-                Napier.e(throwable = e, tag = "WhisperEngine") { "Transcription failed" }
+                Napier.e(throwable = e, tag = "WhisperEngine") { "Transcription failed: ${e.message}" }
                 null
             }
         }
@@ -71,18 +73,25 @@ class WhisperCppEngine(
     override suspend fun loadModel(modelPath: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
+                if (!File(modelPath).exists()) {
+                    Napier.e(tag = "WhisperEngine") { "Model file not found: $modelPath" }
+                    return@withContext false
+                }
+
                 if (nativeLoaded) {
                     modelLoaded = nativeInit(modelPath)
                 } else {
+                    // Fallback: accept the path for simulation
                     modelLoaded = true
                 }
+
                 if (modelLoaded) {
                     currentModelPath = modelPath
                     Napier.d(tag = "WhisperEngine") { "Model loaded: $modelPath" }
                 }
                 modelLoaded
             } catch (e: Exception) {
-                Napier.e(throwable = e, tag = "WhisperEngine") { "Failed to load model" }
+                Napier.e(throwable = e, tag = "WhisperEngine") { "Failed to load model: ${e.message}" }
                 modelLoaded = false
                 false
             }
@@ -103,7 +112,10 @@ class WhisperCppEngine(
 
     override fun isModelLoaded(): Boolean = modelLoaded
 
+    override fun getEngineType(): EngineVariant = EngineVariant.WHISPER_CPP
+
     private fun simulateTranscription(audioData: ByteArray): String {
-        return "This is a simulated transcription result. The native Whisper library is not loaded."
+        val sizeKb = audioData.size / 1024
+        return "Simulated transcription result ($sizeKb KB audio processed). Install libwhisper.so for real inference."
     }
 }

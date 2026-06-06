@@ -19,6 +19,7 @@ mockk = "1.13.13"
 compose-ui-test = "1.7.3"
 navigation-compose = "2.8.5"
 ksp = "2.1.0-1.0.29"
+onnx-runtime = "1.19.0"
 
 [libraries]
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -63,6 +64,8 @@ compose-multiplatform-gradle-plugin = { module = "org.jetbrains.compose:compose-
 compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-compose-compiler-gradle-plugin", version.ref = "kotlin" }
 ksp-gradle-plugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 kotlin-serialization-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+
+onnx-runtime = { module = "com.microsoft.onnxruntime:onnxruntime-android", version.ref = "onnx-runtime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -5,4 +5,5 @@ interface AudioRecorder {
     suspend fun stopRecording(): ByteArray
     suspend fun cancelRecording()
     fun isRecording(): Boolean
+    suspend fun readAudioFrame(frameSize: Int): ShortArray?
 }

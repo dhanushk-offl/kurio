@@ -3,10 +3,11 @@ package com.dhanu.kurio.core.model
 object SpeechModelRegistry {
     fun getDefaultModels(): List<SpeechModel> {
         return listOf(
+            // ── Whisper.cpp (GGML .bin) ──────────────────────
             SpeechModel(
                 id = "whisper-tiny-en",
                 name = "Whisper Tiny English",
-                description = "Lightweight English-only model for fast transcription",
+                description = "Lightweight English-only model for fast transcription on low-end devices",
                 provider = "OpenAI",
                 license = "MIT",
                 language = "English",
@@ -18,6 +19,8 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "1.0.0",
                 recommendedDeviceClass = DeviceClass.LOW_END,
+                engineType = EngineType.WHISPER_CPP,
+                modelFormat = ModelFormat.GGML_BIN,
                 status = ModelStatus.NOT_INSTALLED,
                 isExperimental = false
             ),
@@ -36,6 +39,8 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "1.0.0",
                 recommendedDeviceClass = DeviceClass.MID_RANGE,
+                engineType = EngineType.WHISPER_CPP,
+                modelFormat = ModelFormat.GGML_BIN,
                 status = ModelStatus.NOT_INSTALLED,
                 isExperimental = false
             ),
@@ -54,13 +59,15 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "1.0.0",
                 recommendedDeviceClass = DeviceClass.MID_RANGE,
+                engineType = EngineType.WHISPER_CPP,
+                modelFormat = ModelFormat.GGML_BIN,
                 status = ModelStatus.NOT_INSTALLED,
                 isExperimental = false
             ),
             SpeechModel(
                 id = "whisper-base",
                 name = "Whisper Base Multilingual",
-                description = "Accurate multilingual transcription",
+                description = "Accurate multilingual transcription for mid-range devices",
                 provider = "OpenAI",
                 license = "MIT",
                 language = "Multilingual",
@@ -72,49 +79,81 @@ object SpeechModelRegistry {
                 checksum = "",
                 version = "1.0.0",
                 recommendedDeviceClass = DeviceClass.HIGH_END,
+                engineType = EngineType.WHISPER_CPP,
+                modelFormat = ModelFormat.GGML_BIN,
                 status = ModelStatus.NOT_INSTALLED,
                 isExperimental = false
             ),
             SpeechModel(
+                id = "whisper-small-en",
+                name = "Whisper Small English",
+                description = "High-accuracy English-only model for flagship devices",
+                provider = "OpenAI",
+                license = "MIT",
+                language = "English",
+                sizeBytes = 466_000_000,
+                ramUsageMb = 1200,
+                speedRating = 2,
+                accuracyRating = 5,
+                downloadUrl = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.en.bin",
+                checksum = "",
+                version = "1.0.0",
+                recommendedDeviceClass = DeviceClass.FLAGSHIP,
+                engineType = EngineType.WHISPER_CPP,
+                modelFormat = ModelFormat.GGML_BIN,
+                status = ModelStatus.NOT_INSTALLED,
+                isExperimental = false
+            ),
+
+            // ── Moonshine (ONNX directory via tar.gz) ────────
+            SpeechModel(
                 id = "moonshine-tiny",
                 name = "Moonshine Tiny",
-                description = "Experimental ultra-fast mobile transcription model",
+                description = "Ultra-fast mobile-optimised ONNX transcription model (41 MB)",
                 provider = "Useful Sensors",
                 license = "Apache-2.0",
                 language = "English",
-                sizeBytes = 25_000_000,
+                sizeBytes = 41_000_000,
                 ramUsageMb = 128,
                 speedRating = 5,
                 accuracyRating = 3,
-                downloadUrl = "",
+                downloadUrl = "https://huggingface.co/useful-sensors/moonshine-tiny-en/resolve/main/moonshine-tiny-en.tar.gz",
                 checksum = "",
-                version = "0.1.0",
+                version = "0.2.0",
                 recommendedDeviceClass = DeviceClass.LOW_END,
+                engineType = EngineType.MOONSHINE,
+                modelFormat = ModelFormat.TAR_GZ,
+                isDirectory = true,
                 status = ModelStatus.NOT_INSTALLED,
-                isExperimental = true
+                isExperimental = false
             ),
             SpeechModel(
                 id = "moonshine-base",
                 name = "Moonshine Base",
-                description = "Experimental improved accuracy model",
+                description = "Balanced mobile-optimised ONNX model (75 MB)",
                 provider = "Useful Sensors",
                 license = "Apache-2.0",
                 language = "English",
-                sizeBytes = 50_000_000,
+                sizeBytes = 75_000_000,
                 ramUsageMb = 256,
                 speedRating = 4,
                 accuracyRating = 4,
-                downloadUrl = "",
+                downloadUrl = "https://huggingface.co/useful-sensors/moonshine-base-en/resolve/main/moonshine-base-en.tar.gz",
                 checksum = "",
-                version = "0.1.0",
+                version = "0.2.0",
                 recommendedDeviceClass = DeviceClass.MID_RANGE,
+                engineType = EngineType.MOONSHINE,
+                modelFormat = ModelFormat.TAR_GZ,
+                isDirectory = true,
                 status = ModelStatus.NOT_INSTALLED,
-                isExperimental = true
+                isExperimental = false
             ),
+
+            // ── Vosk (directory model via tar.gz) ────────────
             SpeechModel(
                 id = "vosk-small-en",
                 name = "Vosk Small English",
-                description = "Very low-end device optimized model",
+                description = "Very lightweight model for low-end devices",
                 provider = "Alpha Cephei",
                 license = "Apache-2.0",
                 language = "English",
@@ -122,12 +161,15 @@ object SpeechModelRegistry {
                 ramUsageMb = 96,
                 speedRating = 5,
                 accuracyRating = 2,
-                downloadUrl = "",
+                downloadUrl = "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip",
                 checksum = "",
-                version = "0.3.0",
+                version = "0.4.0",
                 recommendedDeviceClass = DeviceClass.LOW_END,
+                engineType = EngineType.VOSK,
+                modelFormat = ModelFormat.TAR_GZ,
+                isDirectory = true,
                 status = ModelStatus.NOT_INSTALLED,
-                isExperimental = true
+                isExperimental = false
             )
         )
     }

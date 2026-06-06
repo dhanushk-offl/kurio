@@ -7,4 +7,11 @@ interface SpeechEngine {
     suspend fun loadModel(modelPath: String): Boolean
     suspend fun unloadModel()
     fun isModelLoaded(): Boolean
+    fun getEngineType(): EngineVariant
+}
+
+enum class EngineVariant {
+    WHISPER_CPP,
+    MOONSHINE,
+    VOSK
 }

@@ -44,7 +44,10 @@ fun TranscriptionScreen(
             text = when (state.state) {
                 TranscriptionState.IDLE -> "Tap to Record"
                 TranscriptionState.LISTENING -> "Listening..."
+                TranscriptionState.VAD_DETECTING -> "Detecting speech..."
+                TranscriptionState.VAD_SPEECH -> "Speech detected"
                 TranscriptionState.PROCESSING -> "Transcribing..."
+                TranscriptionState.POST_PROCESSING -> "Processing..."
                 TranscriptionState.COMPLETED -> "Done"
                 TranscriptionState.ERROR -> "Error"
             },
@@ -74,7 +77,9 @@ fun TranscriptionScreen(
 
         Spacer(Modifier.height(24.dp))
 
-        if (state.state == TranscriptionState.LISTENING) {
+        if (state.state == TranscriptionState.LISTENING ||
+            state.state == TranscriptionState.VAD_DETECTING ||
+            state.state == TranscriptionState.VAD_SPEECH) {
             Text(
                 text = "Tap again to stop",
                 fontSize = 14.sp,
@@ -111,7 +116,9 @@ private fun RecordButton(
     onStart: () -> Unit,
     onStop: () -> Unit
 ) {
-    val isActive = state == TranscriptionState.LISTENING
+    val isActive = state == TranscriptionState.LISTENING ||
+        state == TranscriptionState.VAD_DETECTING ||
+        state == TranscriptionState.VAD_SPEECH
     val containerColor by animateColorAsState(
         targetValue = if (isActive) KurioColors.Error else KurioColors.Accent,
         label = "recordColor"

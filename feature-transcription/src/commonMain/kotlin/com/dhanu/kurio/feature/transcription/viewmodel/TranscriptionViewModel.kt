@@ -49,7 +49,9 @@ class TranscriptionViewModel(
             observeState().collect { state ->
                 _uiState.update { it.copy(state = state) }
                 when (state) {
-                    TranscriptionState.LISTENING -> startTimer()
+                    TranscriptionState.LISTENING,
+                    TranscriptionState.VAD_DETECTING,
+                    TranscriptionState.VAD_SPEECH -> startTimer()
                     TranscriptionState.IDLE -> stopTimer()
                     else -> {}
                 }

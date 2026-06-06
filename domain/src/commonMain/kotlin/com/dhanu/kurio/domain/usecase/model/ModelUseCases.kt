@@ -1,6 +1,7 @@
 package com.dhanu.kurio.domain.usecase.model
 
 import com.dhanu.kurio.core.model.SpeechModel
+import com.dhanu.kurio.core.model.EngineType
 import com.dhanu.kurio.domain.repository.ModelRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -14,6 +15,13 @@ class GetModelUseCase(
     private val repository: ModelRepository
 ) {
     suspend operator fun invoke(modelId: String): SpeechModel? = repository.getModel(modelId)
+}
+
+class GetModelsByEngineUseCase(
+    private val repository: ModelRepository
+) {
+    suspend operator fun invoke(engineType: EngineType): List<SpeechModel> =
+        repository.getModelsByEngine(engineType)
 }
 
 class DownloadModelUseCase(

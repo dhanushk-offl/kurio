@@ -20,7 +20,9 @@ import com.dhanu.kurio.presentation.component.button.KurioOutlinedButton
 
 @Composable
 fun OnboardingScreen(
-    onComplete: () -> Unit
+    onComplete: () -> Unit,
+    onRequestMicrophonePermission: () -> Unit = {},
+    onRequestOverlayPermission: () -> Unit = {}
 ) {
     var currentStep by remember { mutableStateOf(OnboardingStep.WELCOME) }
 
@@ -35,7 +37,11 @@ fun OnboardingScreen(
 
         when (currentStep) {
             OnboardingStep.WELCOME -> WelcomeStep(onNext = { currentStep = OnboardingStep.PERMISSIONS })
-            OnboardingStep.PERMISSIONS -> PermissionsStep(onNext = { currentStep = OnboardingStep.MODEL_DOWNLOAD })
+            OnboardingStep.PERMISSIONS -> PermissionsStep(
+                onNext = { currentStep = OnboardingStep.MODEL_DOWNLOAD },
+                onRequestMicrophonePermission = onRequestMicrophonePermission,
+                onRequestOverlayPermission = onRequestOverlayPermission
+            )
             OnboardingStep.MODEL_DOWNLOAD -> ModelDownloadStep(onNext = { currentStep = OnboardingStep.COMPLETION })
             OnboardingStep.COMPLETION -> CompletionStep(onComplete = onComplete)
         }
@@ -76,14 +82,18 @@ private fun WelcomeStep(onNext: () -> Unit) {
 }
 
 @Composable
-private fun PermissionsStep(onNext: () -> Unit) {
+private fun PermissionsStep(
+    onNext: () -> Unit,
+    onRequestMicrophonePermission: () -> Unit = {},
+    onRequestOverlayPermission: () -> Unit = {}
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        OnboardingMark("Mic")
+        OnboardingMark("Perm")
         Spacer(Modifier.height(24.dp))
         Text(
-            text = "Microphone Access",
+            text = "Permissions",
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = KurioColors.PrimaryText,
@@ -91,16 +101,20 @@ private fun PermissionsStep(onNext: () -> Unit) {
         )
         Spacer(Modifier.height(12.dp))
         Text(
-            text = "Kurio needs microphone access to transcribe your speech. All audio stays on your device.",
+            text = "Kurio needs microphone access to transcribe your speech. Overlay permission enables transcription anywhere. All audio stays on your device.",
             fontSize = 15.sp,
             color = KurioColors.SecondaryText,
             textAlign = TextAlign.Center,
             lineHeight = 22.sp
         )
-        Spacer(Modifier.height(40.dp))
-        KurioButton(text = "Allow Microphone", onClick = onNext)
+        Spacer(Modifier.height(32.dp))
+        KurioButton(text = "Allow Microphone", onClick = onRequestMicrophonePermission)
         Spacer(Modifier.height(12.dp))
-        KurioOutlinedButton(text = "Skip", onClick = onNext)
+        KurioOutlinedButton(text = "Allow Overlay", onClick = onRequestOverlayPermission)
+        Spacer(Modifier.height(12.dp))
+        TextButton(onClick = onNext) {
+            Text("Skip", color = KurioColors.SecondaryText)
+        }
     }
 }
 

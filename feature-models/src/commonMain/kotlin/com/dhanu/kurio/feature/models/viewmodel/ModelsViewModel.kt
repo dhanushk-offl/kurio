@@ -17,6 +17,8 @@ import kotlinx.coroutines.launch
 data class ModelsUiState(
     val models: List<SpeechModel> = emptyList(),
     val downloadProgress: Map<String, Float> = emptyMap(),
+    val downloadSpeeds: Map<String, String> = emptyMap(),
+    val extractionProgress: Map<String, Float> = emptyMap(),
     val activeModelId: String? = null,
     val isLoading: Boolean = true,
     val error: String? = null
@@ -60,7 +62,10 @@ class ModelsViewModel(
             observeDownloadProgress(modelId).collect { progress ->
                 if (progress != null) {
                     _uiState.update {
-                        it.copy(downloadProgress = it.downloadProgress + (modelId to progress.progress))
+                        it.copy(
+                            downloadProgress = it.downloadProgress + (modelId to progress.progress),
+                            downloadSpeeds = it.downloadSpeeds + (modelId to formatSpeed(progress.speed))
+                        )
                     }
                 }
             }
@@ -85,7 +90,11 @@ class ModelsViewModel(
         scope.launch {
             deleteModel(modelId)
             _uiState.update {
-                it.copy(downloadProgress = it.downloadProgress - modelId)
+                it.copy(
+                    downloadProgress = it.downloadProgress - modelId,
+                    downloadSpeeds = it.downloadSpeeds - modelId,
+                    extractionProgress = it.extractionProgress - modelId
+                )
             }
         }
     }
@@ -103,6 +112,14 @@ class ModelsViewModel(
 
     fun onCleared() {
         scope.coroutineContext.cancelChildren()
+    }
+
+    private fun formatSpeed(bytesPerSec: Long): String {
+        return when {
+            bytesPerSec >= 1_000_000 -> "${bytesPerSec / 1_000_000} MB/s"
+            bytesPerSec >= 1_000 -> "${bytesPerSec / 1_000} KB/s"
+            else -> "$bytesPerSec B/s"
+        }
     }
 
     companion object {

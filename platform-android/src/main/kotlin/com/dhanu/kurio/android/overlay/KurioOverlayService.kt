@@ -377,7 +377,9 @@ class KurioOverlayService : Service(), KoinComponent {
                     }
                 }
 
-                TranscriptionState.LISTENING -> {
+                TranscriptionState.LISTENING,
+                TranscriptionState.VAD_DETECTING,
+                TranscriptionState.VAD_SPEECH -> {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center,
@@ -386,7 +388,11 @@ class KurioOverlayService : Service(), KoinComponent {
                         WaveformAnimation()
                         Spacer(Modifier.width(16.dp))
                         Text(
-                            text = "Listening...",
+                            text = when (state) {
+                                TranscriptionState.VAD_DETECTING -> "Detecting speech..."
+                                TranscriptionState.VAD_SPEECH -> "Speech detected"
+                                else -> "Listening..."
+                            },
                             fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = KurioColors.Error
@@ -419,7 +425,8 @@ class KurioOverlayService : Service(), KoinComponent {
                     }
                 }
 
-                TranscriptionState.PROCESSING -> {
+                TranscriptionState.PROCESSING,
+                TranscriptionState.POST_PROCESSING -> {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
